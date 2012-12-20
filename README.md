@@ -12,3 +12,4 @@ Features
 * Tags ` 
 * Single Author `
 * Archive `
+* Comments (Jeff Atwood would never endorse this if it didn't! ... then again Joel might okay it!)
