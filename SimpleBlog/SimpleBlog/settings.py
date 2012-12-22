@@ -1,4 +1,10 @@
 # Django settings for SimpleBlog project.
+import os
+
+#http://pressedweb.com/snippets/django-relative-path-for-settings-py/
+def project_path(*x):
+    return os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -85,6 +91,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+    
 )
 
 MIDDLEWARE_CLASSES = (
@@ -106,8 +113,9 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    project_path('../templates'),
 )
-
+print TEMPLATE_DIRS
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

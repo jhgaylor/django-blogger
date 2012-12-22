@@ -1,0 +1,6 @@
+{% if posts %}
+    <h1>Posts</h1>
+    {% for p in posts %}
+        <a href="{{p.get_absolute_url}}">{{p.title}}</a>
+    {% endfor %}
+{% endif %}
