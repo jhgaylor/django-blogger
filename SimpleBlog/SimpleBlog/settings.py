@@ -12,6 +12,15 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+BLOG_INFO = {
+    'BLOG_TITLE': 'My Blog Name',
+    'BLOG_SUBTITLE': 'Subtitle'
+}
+
+BLOG_SETTINGS = {
+    'auto_publish': False, #as you can see from the admin page, this doesn't have an effect
+}
+
 MANAGERS = ADMINS
 
 DATABASES = {
