@@ -1,4 +1,4 @@
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render_to_response
 from Blogger.models import Post, Tag, Author
 
@@ -10,8 +10,9 @@ def list(request):
     }
     return render_to_response('list.html', data)
 
-def view_post(request, id):
-    post = Post.objects.get(pk=id)
+def view_post(request, slug):
+    
+    post = Post.objects.get(slug=slug)
     data = {
         'post': post,
     }
@@ -25,3 +26,17 @@ def archive_category(request, category=None):
 
 def archive_author(request, author=None):
     pass
+
+def custom(request, year=None,month=None):
+    if not year:
+        posts = Post.objects.all()
+        data = {
+            'posts': posts,
+        }
+        return render_to_response('list.html', data)
+        return HttpResponse("Recent posts reverse chrono")    
+    if not month:
+        return HttpResponse("Year archive reverse chrono")
+    else:
+        return HttpResponse("Month archive reverse chrono")
+    

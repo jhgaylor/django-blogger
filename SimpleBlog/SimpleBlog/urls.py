@@ -12,9 +12,16 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
+    url(r'^$', 'Blogger.views.custom', name='home'),
+    url(r'^(?P<year>\d{4})/$', 'Blogger.views.custom',name="yearly_archive"),
+    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/$', 'Blogger.views.custom', name="monthly_archive"),
+    
+    url(r'^(?P<slug>[\w-]+)/$', 'Blogger.views.view_post', name='view_post'),
+
+    url(r'^posts/list/', 'Blogger.views.list', name='list'),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     (r'^comments/', include('django.contrib.comments.urls')),
-    url(r'^list/', 'Blogger.views.list', name='list'),
-    url(r'^posts/(?P<id>\d+)/', 'Blogger.views.view_post', name='view_post'),
+    
+    #url(r'^posts/(?P<id>\d+)/', 'Blogger.views.view_post', name='view_post'),
 )
