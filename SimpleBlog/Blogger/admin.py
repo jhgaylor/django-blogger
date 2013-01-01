@@ -1,5 +1,6 @@
 from django.contrib import admin
 from Blogger.models import Tag, Post, Author
+import re
 
 class TagAdmin(admin.ModelAdmin):
 	list_display = ('name', 'number_of_uses')
@@ -13,6 +14,7 @@ class PostAdmin(admin.ModelAdmin):
 	def save_model(self, request, obj, form, change):
 		if not obj.id:
 			obj.author = request.user.author_set.all()[0]
+		obj.slug = re.sub(r'\W+','-',obj.title)
 		obj.save()
 
 

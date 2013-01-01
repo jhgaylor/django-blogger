@@ -36,6 +36,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     published = models.BooleanField(default=settings.BLOG_SETTINGS['auto_publish']) #TODO: i don't think this is working.  would like to make it work.
     tags = models.ManyToManyField(Tag, blank=True)
+    slug = models.CharField(max_length=200, blank=True)
 
     #property for admin panel
     def get_tags(self):
@@ -49,7 +50,7 @@ class Post(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse('view_post', args=[str(self.id)])
+        return reverse('view_post', args=[str(self.slug)])
 
 #TODO: Use django comments
 # class Comment(models.Model):
