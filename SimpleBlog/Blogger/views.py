@@ -1,6 +1,6 @@
 from django.http import HttpRequest
 from django.shortcuts import render_to_response
-from Blogger.models import Post, Tag, Comment, Author
+from Blogger.models import Post, Tag, Author
 
 # Create your views here.
 def list(request):

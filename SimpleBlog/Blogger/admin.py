@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Blogger.models import Tag, Post, Author, Comment
+from Blogger.models import Tag, Post, Author
 
 class TagAdmin(admin.ModelAdmin):
 	list_display = ('name', 'number_of_uses')
@@ -25,4 +25,4 @@ class CommentAdmin(admin.ModelAdmin):
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Post,PostAdmin)
 admin.site.register(Author, AuthorAdmin)
-admin.site.register(Comment, CommentAdmin)
+#admin.site.register(Comment, CommentAdmin)

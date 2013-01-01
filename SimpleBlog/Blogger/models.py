@@ -51,10 +51,11 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('view_post', args=[str(self.id)])
 
-class Comment(models.Model):
-    creator = models.CharField(max_length=200)
-    email = models.EmailField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    body = models.TextField()
-    post = models.ForeignKey(Post)
+#TODO: Use django comments
+# class Comment(models.Model):
+#     creator = models.CharField(max_length=200)
+#     email = models.EmailField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     body = models.TextField()
+#     post = models.ForeignKey(Post)
 
