@@ -2,7 +2,7 @@ from django.contrib import admin
 from Blogger.models import Tag, Post, Author, Comment
 
 class TagAdmin(admin.ModelAdmin):
-	pass
+	list_display = ('name', 'number_of_uses')
 
 class PostAdmin(admin.ModelAdmin):
 	exclude = ('author',)
@@ -17,7 +17,7 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class AuthorAdmin(admin.ModelAdmin):
-	pass
+	list_display = ('first_name', 'last_name', 'user', 'number_of_posts')
 
 class CommentAdmin(admin.ModelAdmin):
 	pass

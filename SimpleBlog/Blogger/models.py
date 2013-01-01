@@ -7,6 +7,11 @@ from django.conf import settings
 class Tag(models.Model):
     name = models.CharField(max_length=200)
     
+    #property for admin panel
+    def number_of_uses(self):
+        return self.post_set.count()
+    number_of_uses.short_description = "Number of uses"
+
     def __unicode__(self):
         return self.name
 
@@ -15,6 +20,11 @@ class Author(models.Model):
     last_name = models.CharField(max_length=200)
     
     user = models.ForeignKey(User)
+
+    #property for admin panel
+    def number_of_posts(self):
+        return self.post_set.count()
+    number_of_posts.short_description = "Number of posts"
 
     def __unicode__(self):
         return ' '.join([self.first_name, self.last_name])
@@ -27,6 +37,7 @@ class Post(models.Model):
     published = models.BooleanField(default=settings.BLOG_SETTINGS['auto_publish']) #TODO: i don't think this is working.  would like to make it work.
     tags = models.ManyToManyField(Tag, blank=True)
 
+    #property for admin panel
     def get_tags(self):
         names = ', '.join([t.name for t in self.tags.all()])
         if len(names) > 20:
