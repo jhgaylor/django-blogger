@@ -1,4 +1,10 @@
-<h1>Title: {{post.title}}</h1>
-<p>Author: {{post.author}}</p>
-<p>{{post.created_at}}</p>
-<p>{{post.body}}</p>
+{% extends 'base.html' %}
+
+{% load markup %}
+
+{% block content %}
+	<h1>Title: {{post.title}}</h1>
+	<p>Author: {{post.author}}</p>
+	<p>{{post.created_at}}</p>
+	<p>{{post.body|markdown}}</p>
+{% endblock %}
