@@ -21,7 +21,8 @@ def get_sidebar_data():
     return data
 
 def render_on_list(request, data):
-    return render_to_response('list.html', data, context_instance=RequestContext(request))
+    #return render_to_response('list.html', data, context_instance=RequestContext(request))
+    return render_to_response('list_4col.html', data, context_instance=RequestContext(request))
 
 # Create your views here.
 def list(request, year=None, month=None, tag=None, author=None):
