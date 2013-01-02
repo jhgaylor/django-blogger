@@ -69,7 +69,33 @@
 
 				<div class="span3">
 					{% block sidebar %}
+						{% if popular_posts %}
+							<h3>Popular Posts</h3>
+						    {% for p in popular_posts %}
+						        <p><a href="{{p.get_absolute_url}}">{{p.title}}</a></p>
+						    {% endfor %}
+						{% endif %}
 
+						{% if recent_posts %}
+							<h3>Recent Posts</h3>
+						    {% for p in recent_posts %}
+						        <p><a href="{{p.get_absolute_url}}">{{p.title}}</a></p>
+						    {% endfor %}
+						{% endif %}
+
+						{% if archive %}
+							<h3>Archive</h3>
+						    {% for p in archive %}
+						        <p><a href="{{p.get_absolute_url}}">{{p.title}}</a></p>
+						    {% endfor %}
+						{% endif %}
+
+						{% if tags %}
+							<h3>Tags</h3>
+						    {% for t in tags %}
+						        <p><a href="{{t.get_absolute_url}}">{{t.name}} ({{t.post_set.all.count}})</a></p>
+						    {% endfor %}
+						{% endif %}
 					{% endblock %}
 				</div>
 			</div>

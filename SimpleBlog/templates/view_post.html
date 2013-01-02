@@ -8,6 +8,10 @@
 	<p>Author: {{post.author}}</p>
 	<p>{{post.created_at}}</p>
 	<p>{{post.body|markdown}}</p>
-	<hr>
+
+	<hr>	
+    {% render_comment_list for post %}
+    <hr>
+	{% render_comment_form for post %}
 	<a href="/">Home</a>
 {% endblock %}
