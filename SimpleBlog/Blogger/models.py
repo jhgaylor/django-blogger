@@ -34,10 +34,11 @@ class Author(models.Model):
     def __unicode__(self):
         return ' '.join([self.first_name, self.last_name])
 
+#http://stackoverflow.com/questions/8215570/ordering-entries-via-comment-count-with-django
+#https://docs.djangoproject.com/en/dev/topics/db/managers/#custom-managers-and-model-inheritance
 class PostManager(models.Manager):
     def get_query_set(self):
-        return super(PostManager,self).get_query_set().all().annotate(\
-            comment_count=Sum("id")).extra(select={
+        return super(PostManager,self).get_query_set().all().extra(select={
                 'comment_count': """SELECT COUNT(*) FROM django_comments
                     WHERE django_comments.object_pk = Blogger_post.id
                     AND django_comments.content_type_id = %s"""
@@ -63,9 +64,6 @@ class Post(models.Model):
         return names
     get_tags.short_description = "Tags"
     
-    
-        
-
 
     def __unicode__(self):
         return self.title
@@ -73,12 +71,4 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('view_post', args=[str(self.slug)])
 
-
-#TODO: Use django comments
-# class Comment(models.Model):
-#     creator = models.CharField(max_length=200)
-#     email = models.EmailField()
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     body = models.TextField()
-#     post = models.ForeignKey(Post)
 

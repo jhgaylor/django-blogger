@@ -4,12 +4,13 @@ from django.template import RequestContext
 from Blogger.models import Post, Tag, Author
 from django.db.models import Sum
 
-
+#only necessary on the hacky way
+from django.contrib.contenttypes.models import ContentType
+entry_type = ContentType.objects.get_for_model(Post)
 
 # Create your views here.
 def list(request, year=None, month=None):
-    popular_posts = Post.popular_posts.all()
-    print [p.comment_count for p in Post.popular_posts.all()]
+    popular_posts = Post.popular_posts.all() #use this for the proper way when implemented
     recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:5]
     archive = None
     tags = Tag.objects.all()

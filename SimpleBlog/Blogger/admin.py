@@ -29,4 +29,3 @@ class CommentAdmin(admin.ModelAdmin):
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Post,PostAdmin)
 admin.site.register(Author, AuthorAdmin)
-#admin.site.register(Comment, CommentAdmin)
