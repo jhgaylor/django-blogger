@@ -23,12 +23,12 @@ def list(request, year=None, month=None, tag=None):
     
     sidebar_data = get_sidebar_data()
     
-    default_data = {
+    data = {
             'posts': None,
             'section_title': 'Posts'
         }
 
-    data = dict(default_data.items() + sidebar_data.items())
+    data.update(sidebar_data)
 
     if tag:
         posts = Post.objects.filter(tags__name=tag)
@@ -57,10 +57,10 @@ def view_post(request, slug):
     
     post = Post.objects.get(slug=slug)
     sidebar_data = get_sidebar_data()
-    default_data = {
+    data = {
         'post': post,
     }
-    data = dict(default_data.items() + sidebar_data.items())
+    data.update(sidebar_data)
     return render_to_response('view_post.html', data, context_instance=RequestContext(request))
 
 def archive_time(request):
