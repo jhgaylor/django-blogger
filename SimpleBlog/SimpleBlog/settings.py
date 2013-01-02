@@ -13,14 +13,29 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+
+#the name of your theme
+BLOG_THEME_NAME = '4col'
+
+#You probably don't want to manually edit this.  We're going to use convention to handle themeing
+BLOG_THEME = {
+    'name': BLOG_THEME_NAME,
+    'static_path': 'themes/'+BLOG_THEME_NAME, #no leading or trailing /
+    'absolute_path': os.path.join(SITE_ROOT, 'templates/themes/'+BLOG_THEME_NAME+'/')
+}
+
+
+
 BLOG_INFO = {
     'BLOG_TITLE': 'My Blog Name',
-    'BLOG_SUBTITLE': 'Subtitle'
+    'BLOG_SUBTITLE': 'Subtitle',
+    'BLOG_THEME_DIR': BLOG_THEME['static_path']
 }
 
 BLOG_SETTINGS = {
     'auto_publish': False, #as you can see from the admin page, this doesn't have an effect
 }
+
 
 MANAGERS = ADMINS
 
@@ -135,7 +150,9 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(SITE_ROOT, 'templates/'),
+    BLOG_THEME['absolute_path'],
+    os.path.join(SITE_ROOT, 'templates/themes/default/'),
+
 )
 
 INSTALLED_APPS = (
