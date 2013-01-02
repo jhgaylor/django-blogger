@@ -20,7 +20,7 @@ urlpatterns = patterns('',
 
     url(r'^posts/list/', 'Blogger.views.list', name='list'),
     url(r'^admin/', include(admin.site.urls)),
-    (r'^comments/', include('django.contrib.comments.urls')),
+    (r'^redocomments/', include('django.contrib.comments.urls')),
     
     #url(r'^posts/(?P<id>\d+)/', 'Blogger.views.view_post', name='view_post'),
 )

@@ -2,10 +2,14 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from Blogger.models import Post, Tag, Author
+from django.db.models import Sum
+
+
 
 # Create your views here.
 def list(request, year=None, month=None):
-    popular_posts = None
+    popular_posts = Post.popular_posts.all()
+    print [p.comment_count for p in Post.popular_posts.all()]
     recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:5]
     archive = None
     tags = Tag.objects.all()
