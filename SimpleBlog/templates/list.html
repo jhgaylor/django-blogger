@@ -1,11 +1,23 @@
 {% extends 'base.html' %}
+{% load markup %}
+
 
 {% block content %}
 	{% if posts %}
-	    <h1>Posts</h1>
+	    <h3>Posts</h3>
 	    {% for p in posts %}
-	        <a href="{{p.get_absolute_url}}">{{p.title}}</a>
+	        <h2><a href="{{p.get_absolute_url}}">{{p.title}}</a></h2>
+	        	<p>{{p.body|truncatechars:200|markdown}}</p>
 	    {% endfor %}
 	{% endif %}
+{% endblock %}
+
+{% block sidebar %}
+	<h3>Popular Posts</h3>
 	
+	<h3>Recent Posts</h3>
+
+	<h3>Archive</h3>
+
+
 {% endblock %}
