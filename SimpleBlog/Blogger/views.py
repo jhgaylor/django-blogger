@@ -5,21 +5,31 @@ from Blogger.models import Post, Tag, Author
 from django.db.models import Sum
 import datetime
 
-
-# Create your views here.
-def list(request, year=None, month=None, tag=None):
+def get_sidebar_data():
     popular_posts = Post.popular_posts.all() #use this for the proper way when implemented
     recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:5]
     archive = Post.objects.all().dates('created_at','month',order='DESC')
     tags = Tag.objects.all()
     data = {
+        'popular_posts': popular_posts,
+        'recent_posts': recent_posts,
+        'archive': archive,
+        'tags': tags,
+    }
+    return data
+
+# Create your views here.
+def list(request, year=None, month=None, tag=None):
+    
+    sidebar_data = get_sidebar_data()
+    
+    default_data = {
             'posts': None,
-            'popular_posts': popular_posts,
-            'recent_posts': recent_posts,
-            'archive': archive,
-            'tags': tags,
             'section_title': 'Posts'
         }
+
+    data = dict(default_data.items() + sidebar_data.items())
+
     if tag:
         posts = Post.objects.filter(tags__name=tag)
         data['posts'] = posts
@@ -46,9 +56,11 @@ def list(request, year=None, month=None, tag=None):
 def view_post(request, slug):
     
     post = Post.objects.get(slug=slug)
-    data = {
+    sidebar_data = get_sidebar_data()
+    default_data = {
         'post': post,
     }
+    data = dict(default_data.items() + sidebar_data.items())
     return render_to_response('view_post.html', data, context_instance=RequestContext(request))
 
 def archive_time(request):
