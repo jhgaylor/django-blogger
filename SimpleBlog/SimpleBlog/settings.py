@@ -15,7 +15,7 @@ ADMINS = (
 
 
 #the name of your theme
-BLOG_THEME_NAME = '4col'
+BLOG_THEME_NAME = 'default'
 
 #You probably don't want to manually edit this.  We're going to use convention to handle themeing
 BLOG_THEME = {
