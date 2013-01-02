@@ -19,6 +19,9 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return self.name
+        
+    def get_absolute_url(self):
+        return reverse('tag_archive', args=[str(self.name)])
 
 class Author(models.Model):
     first_name = models.CharField(max_length=200)

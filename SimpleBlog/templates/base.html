@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+{% load tz %}
 <html>
 <head>
 	<link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -26,12 +26,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</a>
-					<a class="brand" href="#">{{BLOG_TITLE}} -- <small>{{BLOG_SUBTITLE}}</small></a>
+					<a class="brand" href="{% url all_archive %}">{{BLOG_TITLE}} -- <small>{{BLOG_SUBTITLE}}</small></a>
 					<div class="nav-collapse collapse">
 						<ul class="nav">
-							<li class="active"><a href="#">Home</a></li>
-							<li><a href="#about">About</a></li>
-							<li><a href="#contact">Contact</a></li>
+							<li class="active"><a href="{% url all_archive %}">Home</a></li>
+							
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 								<ul class="dropdown-menu">
@@ -85,9 +84,12 @@
 
 						{% if archive %}
 							<h3>Archive</h3>
-						    {% for p in archive %}
-						        <p><a href="{{p.get_absolute_url}}">{{p.title}}</a></p>
+							
+							{% localtime off %}
+						    {% for date in archive %}
+						        <p><a href="{% url monthly_archive date|date:'Y' date|date:'m'%}">{{date|date:"M Y"}}</a></p>
 						    {% endfor %}
+						    {% endlocaltime %}
 						{% endif %}
 
 						{% if tags %}

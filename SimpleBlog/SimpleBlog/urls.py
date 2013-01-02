@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/$', 'Blogger.views.list', name="monthly_archive"),
     
     url(r'^post/(?P<slug>[\w-]+)/$', 'Blogger.views.view_post', name='view_post'),
+    url(r'^tag/(?P<tag>[\w-]+)/$', 'Blogger.views.list', name='tag_archive'),
 
     url(r'^posts/list/', 'Blogger.views.list', name='list'),
     url(r'^admin/', include(admin.site.urls)),
