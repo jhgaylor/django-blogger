@@ -12,7 +12,7 @@ Features
 * Tags (implemented) 
 * Multiple Authors (implemented)
 * Archive (implemented: month, year, author, tags)
-* Comments (implemented 50%)
+* Comments (implemented)
 * Administration is done through auto generated admin (implemented)
 
 Planned Additions
