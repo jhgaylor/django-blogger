@@ -1,8 +1,11 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
+from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from Blogger.models import Post, Tag, Author
 from django.db.models import Sum
+from django.contrib import messages
+from django.contrib.comments import Comment
 import datetime
 
 def get_sidebar_data():
@@ -22,6 +25,13 @@ def get_sidebar_data():
 
 def render_on_list(request, data):
     return render_to_response('list.html', data, context_instance=RequestContext(request))
+
+def comment_posted(request):
+    
+    c = request.GET['c']
+    messages.add_message(request, messages.SUCCESS, 'Commented added successfully.')
+    c = Comment.objects.get(pk=c)
+    return redirect(c.content_object)
 
 # Create your views here.
 def list(request, year=None, month=None, tag=None, author=None):

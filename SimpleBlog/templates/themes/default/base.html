@@ -57,7 +57,21 @@
 				<!-- <div class="hero-unit">
 					<h1>{{BLOG_TITLE}}</h1>
 				</div> -->
-			
+			<div class="row">
+				<div class="span12">
+					{% if messages %}
+					
+					    {% for message in messages %}
+					    
+					    <div class="alert {% if message.tags %} {{ message.tags }}{% endif %}">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>{{message.tags}}!</strong> {{ message }}
+						</div>
+					    {% endfor %}
+						
+					{% endif %}
+				</div>
+			</div>
 
 			<div class="row">
 				<div class="span9">
