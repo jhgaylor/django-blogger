@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+from Blogger.feeds import LatestEntriesFeed
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -20,7 +20,8 @@ urlpatterns = patterns('',
     url(r'^comment/posted/$', 'Blogger.views.comment_posted', name='comment_posted'),
 
     url(r'^post/(?P<slug>[\w-]+)/$', 'Blogger.views.view_post', name='view_post'),
-    
+    (r'^rss/$', LatestEntriesFeed()),
+
 
     
     url(r'^admin/', include(admin.site.urls)),

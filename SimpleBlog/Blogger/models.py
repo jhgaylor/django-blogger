@@ -5,7 +5,7 @@ from django.conf import settings
 
 from django.db.models import Sum
 from django.contrib.contenttypes.models import ContentType
-
+from django.contrib.syndication.views import Feed
 entry_type = ContentType.objects.get(model='post')
 
 # Create your models here.
@@ -77,5 +77,6 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse('view_post', args=[str(self.slug)])
+
 
 
