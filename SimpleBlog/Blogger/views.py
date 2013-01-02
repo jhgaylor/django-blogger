@@ -20,6 +20,9 @@ def get_sidebar_data():
     }
     return data
 
+def render_on_list(request, data):
+    return render_to_response('list.html', data, context_instance=RequestContext(request))
+
 # Create your views here.
 def list(request, year=None, month=None, tag=None, author=None):
     
@@ -36,29 +39,29 @@ def list(request, year=None, month=None, tag=None, author=None):
         posts = Post.objects.filter(tags__name=tag)
         data['posts'] = posts
         data['section_title'] = "Posts"
-        return render_to_response('list.html', data, context_instance=RequestContext(request))
+        return render_on_list(request, data)
     if author:
         fname, lname = author.split('-')
         posts = Post.objects.filter(author__first_name=fname, author__last_name=lname)
         data['posts'] = posts
         data['section_title'] = "Posts"
-        return render_to_response('list.html', data, context_instance=RequestContext(request))
+        return render_on_list(request, data)
     if not year:
         posts = Post.objects.all().order_by('-created_at')
         data['posts'] = posts
         data['section_title'] = "Posts"
-        return render_to_response('list.html', data, context_instance=RequestContext(request))
+        return render_on_list(request, data)
         #Recent posts reverse chrono
     if not month:
         posts = Post.objects.filter(created_at__year=year).order_by('-created_at')
         data['posts'] = posts
         data['section_title'] = "Yearly Archive"
-        return render_to_response('list.html', data, context_instance=RequestContext(request))
+        return render_on_list(request, data)
     else:
         posts = Post.objects.filter(created_at__year=year).filter(created_at__month=month).order_by('-created_at')
         data['posts'] = posts
         data['section_title'] = "Monthly Archive"
-        return render_to_response('list.html', data, context_instance=RequestContext(request))
+        return render_on_list(request, data)
     
 
 def view_post(request, slug):

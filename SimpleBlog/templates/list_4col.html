@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load markup %}
+{% load comments %}
+
+{% block content %}
+	{% if posts %}
+	    <h3>{{section_title}}</h3>
+
+	    {% for p in posts %}
+	    	{% if forloop.counter0|divisibleby:3 %}
+	    		<div class="row">
+	    	{% endif %}
+	    	<div class="span3">
+	        <h2><a href="{{p.get_absolute_url}}">{{p.title}}</a></h2>
+	        	<p>{{p.body|truncatechars:200|markdown}}</p>
+	        </div>
+	        {% if forloop.counter|divisibleby:3 %}
+	    		</div>
+    		{% else %}
+	    		{% if forloop.last %}
+	    	</div>
+	    		{%endif%}
+	    	{% endif %}
+
+	    {% endfor %}
+	{% endif %}
+
+
+	<script>
+	//TODO: this is a hack to make it so that not having multiples of 3 posts won't break the display.
+$(document).ready(function () {
+	console.log($('.container > .span3'));
+})
+	
+	</script>
+{% endblock %}
+
+
+

@@ -60,28 +60,35 @@
 			
 
 			<div class="row">
-				<div class="span9">
+				<div class="span6">
 					{% block content %}
 
 					{% endblock %}
 				</div>
 
-				<div class="span3">
+				<div class="span6">
 					{% block sidebar %}
+					<div class="row">
+						<div class="span3">
 						{% if popular_posts %}
 							<h3>Popular Posts</h3>
 						    {% for p in popular_posts %}
 						        <p><a href="{{p.get_absolute_url}}">{{p.title}} ({{p.comment_count}})</a></p>
 						    {% endfor %}
 						{% endif %}
-
+						</div>
+						<div class="span3">
 						{% if recent_posts %}
 							<h3>Recent Posts</h3>
 						    {% for p in recent_posts %}
 						        <p><a href="{{p.get_absolute_url}}">{{p.title}}</a></p>
 						    {% endfor %}
 						{% endif %}
+						</div>
+					</div>
 
+					<div class="row">
+						<div class="span3">
 						{% if archive %}
 							<h3>Archive</h3>
 							
@@ -94,14 +101,18 @@
 						    {% endfor %}
 						    {% endlocaltime %}
 						{% endif %}
-
+						</div>
+						<div class="span3">
 						{% if authors %}
 							<h3>Authors</h3>
 						    {% for a in authors %}
 						        <p><a href="{{a.get_absolute_url}}">{{a}} ({{a.post_set.all.count}})</a></p>
 						    {% endfor %}
 						{% endif %}
-
+						</div>
+					</div>
+					<div class="row">
+						<div class="span3">
 						{% if tags %}
 							<h3>Tags</h3>
 						    {% for t in tags %}
@@ -109,6 +120,8 @@
 						    {% endfor %}
 						{% endif %}
 					{% endblock %}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
