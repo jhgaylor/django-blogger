@@ -6,7 +6,7 @@ from django.db.models import Sum
 import datetime
 
 def get_sidebar_data():
-    popular_posts = Post.popular_posts.all() #use this for the proper way when implemented
+    popular_posts = Post.popular_posts.all()[:5] #use this for the proper way when implemented
     recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:5]
     archive = Post.objects.all().dates('created_at','month',order='DESC')
     tags = Tag.objects.all()
