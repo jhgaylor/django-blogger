@@ -92,6 +92,13 @@
 						    {% endlocaltime %}
 						{% endif %}
 
+						{% if authors %}
+							<h3>Authors</h3>
+						    {% for a in authors %}
+						        <p><a href="{{a.get_absolute_url}}">{{a}} ({{a.post_set.all.count}})</a></p>
+						    {% endfor %}
+						{% endif %}
+
 						{% if tags %}
 							<h3>Tags</h3>
 						    {% for t in tags %}

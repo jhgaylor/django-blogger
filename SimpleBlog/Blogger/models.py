@@ -19,7 +19,7 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return self.name
-        
+
     def get_absolute_url(self):
         return reverse('tag_archive', args=[str(self.name)])
 
@@ -36,6 +36,10 @@ class Author(models.Model):
 
     def __unicode__(self):
         return ' '.join([self.first_name, self.last_name])
+
+    def get_absolute_url(self):
+        return reverse('author_archive', args=['-'.join([self.first_name, self.last_name])])
+            
 
 #http://stackoverflow.com/questions/8215570/ordering-entries-via-comment-count-with-django
 #https://docs.djangoproject.com/en/dev/topics/db/managers/#custom-managers-and-model-inheritance

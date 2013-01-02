@@ -10,16 +10,18 @@ def get_sidebar_data():
     recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:5]
     archive = Post.objects.all().dates('created_at','month',order='DESC')
     tags = Tag.objects.all()
+    authors = Author.objects.all()
     data = {
         'popular_posts': popular_posts,
         'recent_posts': recent_posts,
         'archive': archive,
         'tags': tags,
+        'authors': authors,
     }
     return data
 
 # Create your views here.
-def list(request, year=None, month=None, tag=None):
+def list(request, year=None, month=None, tag=None, author=None):
     
     sidebar_data = get_sidebar_data()
     
@@ -32,6 +34,12 @@ def list(request, year=None, month=None, tag=None):
 
     if tag:
         posts = Post.objects.filter(tags__name=tag)
+        data['posts'] = posts
+        data['section_title'] = "Posts"
+        return render_to_response('list.html', data, context_instance=RequestContext(request))
+    if author:
+        fname, lname = author.split('-')
+        posts = Post.objects.filter(author__first_name=fname, author__last_name=lname)
         data['posts'] = posts
         data['section_title'] = "Posts"
         return render_to_response('list.html', data, context_instance=RequestContext(request))
