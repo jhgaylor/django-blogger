@@ -24,9 +24,8 @@ def list(request, year=None, month=None):
     if not year:
         posts = Post.objects.all().order_by('-created_at')
         data['posts'] = posts
-
         return render_to_response('list.html', data, context_instance=RequestContext(request))
-        return HttpResponse("Recent posts reverse chrono")    
+        #Recent posts reverse chrono
     if not month:
         return HttpResponse("Year archive reverse chrono")
     else:
