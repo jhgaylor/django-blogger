@@ -15,12 +15,13 @@ class Tag(models.Model):
     """
     
     name = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
     
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('tag_archive', args=[str(self.name)])
+        return reverse('tag_archive', args=[str(self.slug)])
 
     def number_of_uses(self):
         """Return count of post_set"""
@@ -62,7 +63,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     published = models.BooleanField(default=settings.BLOG_SETTINGS['auto_publish']) #TODO: i don't think this is working.  would like to make it work.
     tags = models.ManyToManyField(Tag, blank=True)
-    slug = models.CharField(max_length=200, blank=True, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
     
     objects = models.Manager() # The default manager.
     popular_posts = PostManager()
@@ -84,7 +85,8 @@ class Post(models.Model):
         return names
     get_tags.short_description = "Tags"
 
-    def set_slug(self):
-        """Sets self.slug from self.title"""
-        title_str = unidecode.unidecode(self.title).lower()
-        self.slug = re.sub(r'\W+','-',title_str)
+    #slug field should remove the need for this.  Leaving it here for a while until I'm sure
+    # def set_slug(self):
+    #     """Sets self.slug from self.title"""
+    #     title_str = unidecode.unidecode(self.title).lower()
+    #     self.slug = re.sub(r'\W+','-',title_str)
