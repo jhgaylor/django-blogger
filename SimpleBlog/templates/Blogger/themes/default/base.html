@@ -8,6 +8,14 @@
 	<script src="/static/{{BLOG_THEME_DIR}}/underscore.js"></script>
 	<script src="/static/{{BLOG_THEME_DIR}}/backbone.js"></script>
 	<script src="/static/{{BLOG_THEME_DIR}}/json2.js"></script>
+	{% block extra_head %}
+
+	{% endblock %}
+	<title>
+		{% block title %}
+
+		{% endblock %}
+	</title>
 <style type="text/css">
       body {
         padding-top: 60px;
@@ -18,7 +26,7 @@
 	}
     </style>
 </head>
-
+{% block body %}
 	<body>
 		{% block navbar %}
 		<div class="navbar navbar-inverse navbar-fixed-top">
@@ -130,4 +138,5 @@
 			</div>
 		</div>
 	</body>
+{% endblock %}
 </html>
