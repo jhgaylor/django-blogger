@@ -4,6 +4,9 @@ entry_type = ContentType.objects.get(model='post')
 #http://stackoverflow.com/questions/8215570/ordering-entries-via-comment-count-with-django
 #https://docs.djangoproject.com/en/dev/topics/db/managers/#custom-managers-and-model-inheritance
 class PostManager(models.Manager):
+
+	"""A custom manager for Post models that attaches django comment_count"""
+	
     def get_query_set(self):
         return super(PostManager,self).get_query_set().all().extra(select={
                 'comment_count': """SELECT COUNT(*) FROM django_comments

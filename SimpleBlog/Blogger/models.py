@@ -6,14 +6,18 @@ from django.conf import settings
 from django.db.models import Sum
 from Blogger.managers import PostManager
 from django.contrib.syndication.views import Feed
-
+import unidecode
+import re
 
 # Create your models here.
 class Tag(models.Model):
+
+    """A model to associate a string with another model"""
+    
     name = models.CharField(max_length=200)
     
-    #property for admin panel
     def number_of_uses(self):
+        """Return count of post_set"""
         return self.post_set.count()
     number_of_uses.short_description = "Number of uses"
 
@@ -26,11 +30,10 @@ class Tag(models.Model):
 class Author(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
-    
     user = models.ForeignKey(User)
 
-    #property for admin panel
     def number_of_posts(self):
+        """Return count of post_set"""
         return self.post_set.count()
     number_of_posts.short_description = "Number of posts"
 
@@ -39,9 +42,6 @@ class Author(models.Model):
 
     def get_absolute_url(self):
         return reverse('author_archive', args=['-'.join([self.first_name, self.last_name])])
-            
-
-
 
 class Post(models.Model):
     author = models.ForeignKey(Author, blank=True)
@@ -76,10 +76,16 @@ class Post(models.Model):
 
     #property for admin panel
     def get_tags(self):
+        """Returns tags as a composite string"""
         names = ', '.join([t.name for t in self.tags.all()])
         if len(names) > 20:
             names = names[:20] + "..."
         return names
     get_tags.short_description = "Tags"
+
+    def set_slug(self):
+        """Sets self.slug from self.title"""
+        title_str = unidecode.unidecode(self.title).lower()
+        self.slug = re.sub(r'\W+','-',title_str)
     
 
