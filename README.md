@@ -7,13 +7,13 @@ Features
 --------
 
 * RSS Feed 
-* Markdown (implemented, could use some thought)
-* Twitter Bootstrap UI (implemented)
-* Tags (implemented) 
-* Multiple Authors (implemented)
-* Archive (implemented: month, year, author, tags)
-* Comments (implemented)
-* Administration is done through auto generated admin (implemented)
+* Markdown 
+* Twitter Bootstrap UI
+* Tags 
+* Multiple Authors
+* Archive 
+* Comments
+* Administration is done through auto generated admin
 
 Planned Additions
 -----------------
