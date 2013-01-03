@@ -1,7 +1,9 @@
 django-simple-blog
 ==================
 
-A simple blogging app for django
+A simple blogging app for django.
+
+Fully functional, plug-and-test django project showing off Blogger.
 
 Features
 --------
