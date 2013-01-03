@@ -63,6 +63,25 @@ class Post(models.Model):
     objects = models.Manager() # The default manager.
     popular_posts = PostManager()
 
+    class Meta:
+        verbose_name_plural = "posts"
+
+    def __unicode__(self):
+        return self.title
+    
+    def get_absolute_url(self):
+        return reverse('view_post', args=[str(self.slug)])
+
+    #validation
+    # def clean_fields(self):
+    #     pass
+        
+    # def clean(self):
+    #     pass
+
+    # def validate_unique(self):
+    #     pass
+
     #property for admin panel
     def get_tags(self):
         names = ', '.join([t.name for t in self.tags.all()])
@@ -71,12 +90,4 @@ class Post(models.Model):
         return names
     get_tags.short_description = "Tags"
     
-
-    def __unicode__(self):
-        return self.title
-    
-    def get_absolute_url(self):
-        return reverse('view_post', args=[str(self.slug)])
-
-
 

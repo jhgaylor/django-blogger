@@ -20,11 +20,9 @@ BLOG_THEME_NAME = 'default'
 #You probably don't want to manually edit this.  We're going to use convention to handle themeing
 BLOG_THEME = {
     'name': BLOG_THEME_NAME,
-    'static_path': 'themes/'+BLOG_THEME_NAME, #no leading or trailing /
-    'absolute_path': os.path.join(SITE_ROOT, 'templates/themes/'+BLOG_THEME_NAME+'/')
+    'static_path': 'Blogger/themes/'+BLOG_THEME_NAME, #no leading or trailing /
+    'absolute_path': os.path.join(SITE_ROOT, 'Blogger/templates/themes/'+BLOG_THEME_NAME+'/')
 }
-
-
 
 BLOG_INFO = {
     'BLOG_TITLE': 'My Blog Name',
@@ -151,7 +149,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     BLOG_THEME['absolute_path'],
-    os.path.join(SITE_ROOT, 'templates/themes/default/'),
+    os.path.join(SITE_ROOT, 'templates/Blogger/themes/default/'),
 
 )
 
