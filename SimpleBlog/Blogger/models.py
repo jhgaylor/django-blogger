@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from django.db.models import Sum
-from django.contrib.contenttypes.models import ContentType
+from Blogger.managers import PostManager
 from django.contrib.syndication.views import Feed
-entry_type = ContentType.objects.get(model='post')
+
 
 # Create your models here.
 class Tag(models.Model):
@@ -41,15 +41,7 @@ class Author(models.Model):
         return reverse('author_archive', args=['-'.join([self.first_name, self.last_name])])
             
 
-#http://stackoverflow.com/questions/8215570/ordering-entries-via-comment-count-with-django
-#https://docs.djangoproject.com/en/dev/topics/db/managers/#custom-managers-and-model-inheritance
-class PostManager(models.Manager):
-    def get_query_set(self):
-        return super(PostManager,self).get_query_set().all().extra(select={
-                'comment_count': """SELECT COUNT(*) FROM django_comments
-                    WHERE django_comments.object_pk = Blogger_post.id
-                    AND django_comments.content_type_id = %s"""
-            }, select_params=(entry_type.id,)).order_by('-comment_count')
+
 
 class Post(models.Model):
     author = models.ForeignKey(Author, blank=True)
@@ -75,7 +67,7 @@ class Post(models.Model):
     #validation
     # def clean_fields(self):
     #     pass
-        
+
     # def clean(self):
     #     pass
 
