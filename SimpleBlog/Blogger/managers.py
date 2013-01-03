@@ -5,10 +5,11 @@ entry_type = ContentType.objects.get(model='post')
 #https://docs.djangoproject.com/en/dev/topics/db/managers/#custom-managers-and-model-inheritance
 class PostManager(models.Manager):
 
-	"""A custom manager for Post models that attaches django comment_count"""
-	
-    def get_query_set(self):
-        return super(PostManager,self).get_query_set().all().extra(select={
+	"""A custom manager for Post models"""
+
+	def get_query_set(self):
+		"""attaches django comment_count to all querysets"""
+		return super(PostManager,self).get_query_set().all().extra(select={
                 'comment_count': """SELECT COUNT(*) FROM django_comments
                     WHERE django_comments.object_pk = Blogger_post.id
                     AND django_comments.content_type_id = %s"""

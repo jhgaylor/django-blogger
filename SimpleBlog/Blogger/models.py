@@ -11,31 +11,35 @@ import re
 
 # Create your models here.
 class Tag(models.Model):
-
-    """A model to associate a string with another model"""
+    """
+    A string to be associated with another model
+    """
     
     name = models.CharField(max_length=200)
     
-    def number_of_uses(self):
-        """Return count of post_set"""
-        return self.post_set.count()
-    number_of_uses.short_description = "Number of uses"
-
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('tag_archive', args=[str(self.name)])
 
+    # def validate_unique(self):
+    #     pass
+
+    def number_of_uses(self):
+        """Return count of post_set"""
+        return self.post_set.count()
+    number_of_uses.short_description = "Number of uses"
+
+
 class Author(models.Model):
+    """
+    Association of a Blog Author data and a django user
+    """
+
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     user = models.ForeignKey(User)
-
-    def number_of_posts(self):
-        """Return count of post_set"""
-        return self.post_set.count()
-    number_of_posts.short_description = "Number of posts"
 
     def __unicode__(self):
         return ' '.join([self.first_name, self.last_name])
@@ -43,7 +47,19 @@ class Author(models.Model):
     def get_absolute_url(self):
         return reverse('author_archive', args=['-'.join([self.first_name, self.last_name])])
 
+    # def validate_unique(self):
+    #     pass
+    
+    def number_of_posts(self):
+        """Return count of post_set"""
+        return self.post_set.count()
+    number_of_posts.short_description = "Number of posts"
+
 class Post(models.Model):
+    """
+    User generated blog post
+    """
+
     author = models.ForeignKey(Author, blank=True)
     title = models.CharField(max_length=200)
     body = models.TextField()
@@ -63,13 +79,6 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse('view_post', args=[str(self.slug)])
-
-    #validation
-    # def clean_fields(self):
-    #     pass
-
-    # def clean(self):
-    #     pass
 
     # def validate_unique(self):
     #     pass
