@@ -13,9 +13,9 @@ class LatestEntriesFeed(Feed):
     def item_title(self, item):
         return item.title
 
-    def item_body(self, item):
+    def item_description(self, item):
         return item.body
 
-    # item_link is only needed if NewsItem has no get_absolute_url method.
+    # item_link is only needed if Post has no get_absolute_url method.
     def item_link(self, item):
         return reverse('view_post', args=[item.slug])

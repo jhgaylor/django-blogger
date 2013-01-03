@@ -9,7 +9,7 @@ class TagAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
 	exclude = ('author',)
 	list_display = ('title', 'author', 'created_at', 'published', 'get_tags')
-	list_filter = ['author', 'created_at']
+	list_filter = ['author', 'created_at', 'published']
 	#this makes the author of a post the user that created it.
 	#http://stackoverflow.com/questions/753704/manipulating-data-in-djangos-admin-panel-on-save
 	def save_model(self, request, obj, form, change):
