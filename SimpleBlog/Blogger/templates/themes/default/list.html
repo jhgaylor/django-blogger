@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load markup %}
+{% load comments %}
+
+{% block content %}
+	{% if posts %}
+	    <h3>{{section_title}}</h3>
+	    {% for p in posts %}
+	        <h2><a href="{{p.get_absolute_url}}">{{p.title}}</a></h2>
+	        	<p>{{p.body|truncatechars:200|markdown}}</p>
+
+	    {% endfor %}
+	{% endif %}
+{% endblock %}
+
+
+

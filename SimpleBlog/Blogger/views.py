@@ -24,6 +24,8 @@ def get_sidebar_data():
     return data
 
 def render_on_list(request, data):
+    #this is a way to do themeing
+    #return render_to_response('themes/3col/list.html', data, context_instance=RequestContext(request))
     return render_to_response('list.html', data, context_instance=RequestContext(request))
 
 def comment_posted(request):
@@ -46,7 +48,7 @@ def list(request, year=None, month=None, tag=None, author=None):
     data.update(sidebar_data)
 
     if tag:
-        posts = Post.objects.filter(tags__name=tag)
+        posts = Post.objects.filter(tags__slug=tag)
         data['posts'] = posts
         data['section_title'] = "Posts"
         return render_on_list(request, data)

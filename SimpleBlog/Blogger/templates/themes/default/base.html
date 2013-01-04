@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+{% load tz %}
+<html>
+<head>
+	<link href="{{STATIC_URL}}{{BLOG_THEME_DIR}}/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<script src="/static/{{BLOG_THEME_DIR}}/jquery-1.8.3.min.js"></script>
+	<script src="/static/{{BLOG_THEME_DIR}}/bootstrap/js/bootstrap.js"></script>
+	<script src="/static/{{BLOG_THEME_DIR}}/underscore.js"></script>
+	<script src="/static/{{BLOG_THEME_DIR}}/backbone.js"></script>
+	<script src="/static/{{BLOG_THEME_DIR}}/json2.js"></script>
+	{% block extra_head %}
+
+	{% endblock %}
+	<title>
+		{% block title %}
+
+		{% endblock %}
+	</title>
+<style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      #id_honeypot {
+	    display: none;
+	}
+    </style>
+</head>
+{% block body %}
+	<body>
+		{% block navbar %}
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="{% url all_archive %}">{{BLOG_TITLE}} -- <small>{{BLOG_SUBTITLE}}</small></a>
+					<div class="nav-collapse collapse">
+						<ul class="nav">
+							<li class="active"><a href="{% url all_archive %}">Home</a></li>
+							
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li class="nav-header">Nav header</li>
+									<li><a href="#">Separated link</a></li>
+									<li><a href="#">One more separated link</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+		{% endblock %}
+
+
+
+		<div class="container">
+			
+				<!-- <div class="hero-unit">
+					<h1>{{BLOG_TITLE}}</h1>
+				</div> -->
+			<div class="row">
+				<div class="span12">
+					{% if messages %}
+					
+					    {% for message in messages %}
+					    
+					    <div class="alert {% if message.tags %} {{ message.tags }}{% endif %}">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>{{message.tags}}!</strong> {{ message }}
+						</div>
+					    {% endfor %}
+						
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="span9">
+					{% block content %}
+
+					{% endblock %}
+				</div>
+
+				<div class="span3">
+					{% block sidebar %}
+						{% if popular_posts %}
+							<h3>Popular Posts</h3>
+						    {% for p in popular_posts %}
+						        <p><a href="{{p.get_absolute_url}}">{{p.title}} ({{p.comment_count}})</a></p>
+						    {% endfor %}
+						{% endif %}
+
+						{% if recent_posts %}
+							<h3>Recent Posts</h3>
+						    {% for p in recent_posts %}
+						        <p><a href="{{p.get_absolute_url}}">{{p.title}}</a></p>
+						    {% endfor %}
+						{% endif %}
+
+						{% if archive %}
+							<h3>Archive</h3>
+							
+							{% localtime off %}
+						    {% for date in archive %}
+						        <p>
+						        	<a href="{% url monthly_archive date|date:'Y' date|date:'m'%}">{{date|date:"M Y"}}</a>
+						        	<a href="{% url yearly_archive date|date:'Y'%}" style="float:right; margin-right:30px"> {{date|date:"Y"}}</a>
+						        </p>
+						    {% endfor %}
+						    {% endlocaltime %}
+						{% endif %}
+
+						{% if authors %}
+							<h3>Authors</h3>
+						    {% for a in authors %}
+						        <p><a href="{{a.get_absolute_url}}">{{a}} ({{a.post_set.all.count}})</a></p>
+						    {% endfor %}
+						{% endif %}
+
+						{% if tags %}
+							<h3>Tags</h3>
+						    {% for t in tags %}
+						        <p><a href="{{t.get_absolute_url}}">{{t.name}} ({{t.post_set.all.count}})</a></p>
+						    {% endfor %}
+						{% endif %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+	</body>
+{% endblock %}
+</html>
