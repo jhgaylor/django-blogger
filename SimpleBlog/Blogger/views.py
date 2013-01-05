@@ -8,6 +8,8 @@ from django.contrib import messages
 from django.contrib.comments import Comment
 import datetime
 
+from Blogger import settings as blogger_settings
+
 def get_sidebar_data():
     popular_posts = Post.popular_posts.all()[:5] #use this for the proper way when implemented
     recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:5]
@@ -25,8 +27,9 @@ def get_sidebar_data():
 
 def render_on_list(request, data):
     #this is a way to do themeing
+    #print blogger_settings.BLOG_THEME_NAME + '/list.html'
+    return render_to_response(blogger_settings.BLOG_THEME['template_path'] + '/list.html', data, context_instance=RequestContext(request))
     #return render_to_response('themes/3col/list.html', data, context_instance=RequestContext(request))
-    return render_to_response('list.html', data, context_instance=RequestContext(request))
 
 def comment_posted(request):
     

@@ -1,4 +1,4 @@
-from django.conf import settings
+from Blogger import settings
 
 def blog_info(request):
 	"""returns settings.BLOG_INFO"""

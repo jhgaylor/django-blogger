@@ -1,8 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.conf import settings
-
+from Blogger.settings import BLOG_SETTINGS
 from django.db.models import Sum
 from Blogger.managers import PostManager
 from django.contrib.syndication.views import Feed
@@ -61,7 +60,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    published = models.BooleanField(default=settings.BLOG_SETTINGS['auto_publish']) #TODO: i don't think this is working.  would like to make it work.
+    published = models.BooleanField(default=BLOG_SETTINGS['auto_publish']) #TODO: i don't think this is working.  would like to make it work.
     tags = models.ManyToManyField(Tag, blank=True)
     slug = models.SlugField(max_length=200, unique=True)
     
