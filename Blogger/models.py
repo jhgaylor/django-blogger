@@ -1,12 +1,14 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from Blogger.settings import BLOG_SETTINGS
+#from Blogger.settings import BLOG_SETTINGS
+from django.conf import settings
 from django.db.models import Sum
 from Blogger.managers import PostManager
 from django.contrib.syndication.views import Feed
 import unidecode
 import re
+BLOG_SETTINGS = settings.BLOG_SETTINGS['defaults']
 
 class Tag(models.Model):
     """
