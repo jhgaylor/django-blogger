@@ -13,14 +13,14 @@ Installation and setup
 	* INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
 	* add BLOG_SETTINGS to settings.py.  It should look something like this.
 ```python
-BLOG_SETTINGS = {
-    'defaults': {
-        'auto_publish': False,
-    },
-    'info': {
-        'BLOG_TITLE': 'My Blog\'s new Name',
-        'BLOG_SUBTITLE': 'Blog subname',
-    } 
+	BLOG_SETTINGS = {
+    	'defaults': {
+        	'auto_publish': False,
+    	},
+    	'info': {
+        	'BLOG_TITLE': 'My Blog\'s new Name',
+        	'BLOG_SUBTITLE': 'Blog subname',
+    	} 
 }
 ```
 3. ./manage.py syncdb
