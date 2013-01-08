@@ -6,7 +6,9 @@ A simple blogging app for django.
 Installation and setup
 ----------------------
 1. pip install django-blogger
-
+2. Configure Django
+  * a
+  * b
 Features
 --------
 
