@@ -3,7 +3,7 @@ import os
 from setuptools import setup, find_packages
 
 setup(
-    name = "django-simple-blog",
+    name = "django-blogger",
     version = "0.1.8",
     author = "Jake Gaylor",
     author_email = "jake@codegur.us",
