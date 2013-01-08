@@ -12,7 +12,7 @@ Installation and setup
 	* TEMPLATE_CONTEXT_PROCESSORS += ("Blogger.context_processors.blog_info",)
 	* INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
 	* add BLOG_SETTINGS to settings.py.  It should look something like this.
-```python
+```
     BLOG_SETTINGS = {
         'defaults': {
             'auto_publish': False,
