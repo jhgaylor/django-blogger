@@ -16,6 +16,7 @@ Installation and setup
 First use
 ---------
 In the django admin panel:
+
 1. Make an author and associate it with your django user
 2. Post stuff!
 
