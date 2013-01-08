@@ -3,7 +3,9 @@ django-simple-blog
 
 A simple blogging app for django.
 
-Fully functional, plug-and-test django project showing off Blogger.
+Installation and setup
+----------------------
+1. pip install django-blogger
 
 Features
 --------
