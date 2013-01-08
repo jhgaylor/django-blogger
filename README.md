@@ -8,7 +8,7 @@ Installation and setup
 1. pip install django-blogger
 2. Configure Django
   * TEMPLATE_CONTEXT_PROCESSORS += ("Blogger.context_processors.blog_info",)
-  * INSTALLED_APPS += ('Blogger',)
+  * INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
   * Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
   * add (r'^', include('Blogger.urls')), to your project's urls.py
 3. ./manage.py syncdb
@@ -30,12 +30,13 @@ BLOG_THEME controls which theme is currently active
 
 Themes
 ------
-Themes are contained in Blogger/templates/themes/THEMENAME/
+Update this!
+<!-- Themes are contained in Blogger/templates/themes/THEMENAME/
 Files include base.html, list.html, and view_post.html
 Not all files are necessary, and the app will fall back on Blogger/templates/themes/FILE.html
 Static files for themes are at Blogger/static/blogger_themes/THEMENAME/
 The default themes are default, 3col and 4col.  They all rely on bootstrap and jquery.
-If you know a better way to support themeing, please let me know!
+If you know a better way to support themeing, please let me know! -->
 
 Features
 --------

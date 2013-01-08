@@ -28,7 +28,7 @@ def get_sidebar_data():
 def render_on_list(request, data):
     #this is a way to do themeing
     #print blogger_settings.BLOG_THEME_NAME + '/list.html'
-    return render_to_response(blogger_settings.BLOG_THEME['template_path'] + '/list.html', data, context_instance=RequestContext(request))
+    return render_to_response('list.html', data, context_instance=RequestContext(request))
     #return render_to_response('themes/3col/list.html', data, context_instance=RequestContext(request))
 
 def comment_posted(request):

@@ -2,12 +2,12 @@
 {% load tz %}
 <html>
 <head>
-	<link href="{{STATIC_URL}}{{BLOG_THEME_DIR}}/bootstrap/css/bootstrap.css" rel="stylesheet">
-	<script src="/static/{{BLOG_THEME_DIR}}/jquery-1.8.3.min.js"></script>
-	<script src="/static/{{BLOG_THEME_DIR}}/bootstrap/js/bootstrap.js"></script>
-	<script src="/static/{{BLOG_THEME_DIR}}/underscore.js"></script>
-	<script src="/static/{{BLOG_THEME_DIR}}/backbone.js"></script>
-	<script src="/static/{{BLOG_THEME_DIR}}/json2.js"></script>
+	<link href="{{STATIC_URL}}/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<script src="/static/jquery-1.8.3.min.js"></script>
+	<script src="/static/bootstrap/js/bootstrap.js"></script>
+	<script src="/static/underscore.js"></script>
+	<script src="/static/backbone.js"></script>
+	<script src="/static/json2.js"></script>
 	{% block extra_head %}
 
 	{% endblock %}
@@ -21,9 +21,6 @@
         padding-top: 60px;
         padding-bottom: 40px;
       }
-      #id_honeypot {
-	    display: none;
-	}
     </style>
 </head>
 {% block body %}
@@ -68,21 +65,7 @@
 				<!-- <div class="hero-unit">
 					<h1>{{BLOG_TITLE}}</h1>
 				</div> -->
-			<div class="row">
-				<div class="span12">
-					{% if messages %}
-					
-					    {% for message in messages %}
-					    
-					    <div class="alert {% if message.tags %} {{ message.tags }}{% endif %}">
-							<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<strong>{{message.tags}}!</strong> {{ message }}
-						</div>
-					    {% endfor %}
-						
-					{% endif %}
-				</div>
-			</div>
+			
 
 			<div class="row">
 				<div class="span9">
@@ -138,5 +121,5 @@
 			</div>
 		</div>
 	</body>
-{% endblock %}
+{% endblock %}		
 </html>

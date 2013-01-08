@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load markup %}
+{% load comments %}
+
+{% block content %}
+	<h1>Title: {{post.title}}</h1>
+	<p>Author: {{post.author}}</p>
+	<p>{{post.created_at}}</p>
+	<p>{{post.body|markdown}}</p>
+
+	<hr>	
+    {% render_comment_list for post %}
+    <hr>
+	{% get_comment_form for post as form %}
+	<table>
+		<form action="{% comment_form_target %}" method="post">
+			{% csrf_token %}
+			{{ form }}
+			<tr>
+				<td colspan="2">
+				<input type="submit" name="submit" value="Post">
+				<input type="submit" name="preview" value="Preview">
+				</td>
+			</tr>
+			<input type="hidden" name="next" value="{% url comment_posted %}" />
+		</form>
+	</table>
+	<a href="/">Home</a>
+{% endblock %}
