@@ -17,7 +17,7 @@ class PostAdmin(admin.ModelAdmin):
 	#http://stackoverflow.com/questions/753704/manipulating-data-in-djangos-admin-panel-on-save
 	def save_model(self, request, obj, form, change):
 		"""Customize save method via admin panel save"""
-		if change != True:
+		if not change:
 			obj.author = request.user.author_set.all()[0]
 		#obj.set_slug()
 		obj.save()
