@@ -14,13 +14,13 @@ Installation and setup
 	* add BLOG_SETTINGS to settings.py.  It should look something like this.
 <pre>
 BLOG_SETTINGS = {
-	'defaults': {
-		'auto_publish': False,
-	},
-	'info': {
-		'BLOG_TITLE': 'My Blog\'s new Name',
-		'BLOG_SUBTITLE': 'Blog subname',
-	} 
+    'defaults': {
+        'auto_publish': False,
+    },
+    'info': {
+        'BLOG_TITLE': 'My Blog\'s new Name',
+        'BLOG_SUBTITLE': 'Blog subname',
+    } 
 }
 </pre>
 3. ./manage.py syncdb
