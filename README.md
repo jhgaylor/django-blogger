@@ -9,6 +9,17 @@ Installation and setup
 2. Configure Django
   * TEMPLATE_CONTEXT_PROCESSORS += ("Blogger.context_processors.blog_info",)
   * INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
+  * Add a dictionary 
+  	
+BLOG_SETTINGS = {
+    'defaults': {
+        'auto_publish': False,
+    },
+    'info': {
+        'BLOG_TITLE': 'My Blog\'s new Name',
+        'BLOG_SUBTITLE': 'Blog subname',
+    } 
+}
   * Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
   * add (r'^', include('Blogger.urls')), to your project's urls.py
 3. ./manage.py syncdb
