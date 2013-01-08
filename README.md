@@ -7,10 +7,12 @@ Installation and setup
 ----------------------
 1. pip install django-blogger
 2. Configure Django
-  * TEMPLATE_CONTEXT_PROCESSORS += ("Blogger.context_processors.blog_info",)
-  * INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
-  * Add a dictionary 
-  	
+	* add (r'^', include('Blogger.urls')), to your project's urls.py
+ 	* Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
+	* TEMPLATE_CONTEXT_PROCESSORS += ("Blogger.context_processors.blog_info",)
+	* INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
+	* add BLOG_SETTINGS to settings.py.  It should look something like this.
+<pre>
 BLOG_SETTINGS = {
     'defaults': {
         'auto_publish': False,
@@ -20,8 +22,7 @@ BLOG_SETTINGS = {
         'BLOG_SUBTITLE': 'Blog subname',
     } 
 }
-  * Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
-  * add (r'^', include('Blogger.urls')), to your project's urls.py
+</pre>
 3. ./manage.py syncdb
   
 First use
