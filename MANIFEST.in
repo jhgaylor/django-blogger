@@ -1,1 +1,2 @@
 include AUTHORS CHANGES README INSTALL LICENSE requirements.txt
+recursive-include Blogger *.py *.html *.js *.css
