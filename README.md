@@ -18,7 +18,7 @@ Installation and setup
             'auto_publish': False,
         },
         'info': {
-            'BLOG_TITLE': 'My Blog\'s new Name',
+            'BLOG_TITLE': 'My Blog Name',
             'BLOG_SUBTITLE': 'Blog subname',
         } 
     }

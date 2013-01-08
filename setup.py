@@ -8,7 +8,7 @@ setup(
     author = "Jake Gaylor",
     author_email = "jake@codegur.us",
     description = "A package to administer a simple blog via Django.",
-    url = "https://github.com/jhgaylor/django-simple-blog/",
+    url = "https://github.com/jhgaylor/django-blogger/",
     install_requires = [ln for ln in open('requirements.txt')],
     packages = find_packages(), 
     #package_data=package_data,
