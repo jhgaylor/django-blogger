@@ -21,7 +21,7 @@ Installation and setup
             'BLOG_TITLE': 'My Blog\'s new Name',
             'BLOG_SUBTITLE': 'Blog subname',
         } 
-}
+    }
 ```
 3. ./manage.py syncdb
   
