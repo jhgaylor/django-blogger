@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.comments import Comment
 import datetime
 
-from Blogger import settings as blogger_settings
+
 
 def get_sidebar_data():
     popular_posts = Post.popular_posts.all()[:5] #use this for the proper way when implemented
