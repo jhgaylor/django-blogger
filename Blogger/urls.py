@@ -10,4 +10,5 @@ urlpatterns = patterns('Blogger.views',
     url(r'^confirm/comment/$', 'comment_posted', name='comment_posted'),
     url(r'^post/(?P<slug>[\w-]+)/$', 'view_post', name='view_post'),
     (r'^rss/$', LatestEntriesFeed()),
+    (r'^api/', include('Blogger.api.urls')), #no $ on included urlconfs.  It would cause breakage
 )	
