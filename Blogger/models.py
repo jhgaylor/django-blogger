@@ -10,14 +10,15 @@ import unidecode
 import re
 BLOG_SETTINGS = settings.BLOG_SETTINGS['defaults']
 
+
 class Tag(models.Model):
     """
     A string to be associated with another model
     """
-    
+
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    
+
     def __unicode__(self):
         return self.name
 
@@ -40,7 +41,7 @@ class Author(models.Model):
     user = models.ForeignKey(User)
 
     class Meta:
-        unique_together = (("first_name", "last_name"))    
+        unique_together = (("first_name", "last_name"))
 
     def __unicode__(self):
         return ' '.join([self.first_name, self.last_name])
@@ -53,6 +54,7 @@ class Author(models.Model):
         return self.post_set.count()
     number_of_posts.short_description = "Number of posts"
 
+
 class Post(models.Model):
     """
     User generated blog post
@@ -62,11 +64,11 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    published = models.BooleanField(default=BLOG_SETTINGS['auto_publish']) #TODO: i don't think this is working.  would like to make it work.
+    published = models.BooleanField(default=BLOG_SETTINGS['auto_publish'])  # TODO: i don't think this is working.  would like to make it work.
     tags = models.ManyToManyField(Tag, blank=True)
     slug = models.SlugField(max_length=200, unique=True)
-    
-    objects = models.Manager() # The default manager.
+
+    objects = models.Manager()  # The default manager.
     popular_posts = PostManager()
 
     class Meta:
@@ -74,7 +76,7 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.title
-    
+
     def get_absolute_url(self):
         return reverse('view_post', args=[str(self.slug)])
 
