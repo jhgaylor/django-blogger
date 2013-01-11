@@ -8,7 +8,8 @@ from django.contrib import messages
 from django.contrib.comments import Comment
 import datetime
 
+
 def posts(request):
 
-	posts = Post.objects.all()
-	return HttpResponse("success")
+    posts = Post.objects.all()
+    return HttpResponse("success")
