@@ -10,6 +10,7 @@ Installation and setup
 	* add (r'^', include('Blogger.urls')), to your project's urls.py
  	* Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
 	* TEMPLATE_CONTEXT_PROCESSORS += ("Blogger.context_processors.blog_info",)
+    * Ensure that 'rest_framework' is in your installed apps if you plan to use the api.  Rest Framework 2 should be installed for you by pip.
 	* INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
 	* add BLOG_SETTINGS to settings.py.  It should look something like this.
 ```
@@ -35,10 +36,11 @@ In the django admin panel:
 
 Settings
 --------
-Currently live in Blogger/settings.py (Needs to change, anyone got a better way?)
+Update this!
+<!-- Currently live in Blogger/settings.py (Needs to change, anyone got a better way?)
 BLOG_INFO is attached to all responses so the information is available to the templates.
 BLOG_SETTINGS change the defaults of models and some constats for views
-BLOG_THEME controls which theme is currently active
+BLOG_THEME controls which theme is currently active -->
 
 Themes
 ------

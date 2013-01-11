@@ -2,6 +2,7 @@ from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from Blogger.models import Post
 
+
 class LatestEntriesFeed(Feed):
     title = "Blog RSS"
     link = "/rss/"

@@ -7,8 +7,8 @@ from django.db.models import Sum
 from django.contrib import messages
 from django.contrib.comments import Comment
 import datetime
-from Blogger.models import Post
+
 def posts(request):
+
 	posts = Post.objects.all()
-	
 	return HttpResponse("success")
