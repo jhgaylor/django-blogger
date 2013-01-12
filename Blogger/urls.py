@@ -1,5 +1,18 @@
 from django.conf.urls import patterns, include, url
 from Blogger.feeds import LatestEntriesFeed
+from rest_framework.urlpatterns import format_suffix_patterns
+from Blogger.views import PostList, PostDetail, AuthorList, AuthorDetail
+
+api_patterns = patterns('Blogger.views',
+    url(r'^$', 'api_root'),
+    url(r'^posts/$', PostList.as_view(), name='posts-list'),
+    url(r'^posts/(?P<pk>\d+)/$', PostDetail.as_view(), name='post-detail'),
+    url(r'^authors/$', AuthorList.as_view(), name='authors-list'),
+    url(r'^authors/(?P<pk>\d+)/$', AuthorDetail.as_view(), name='author-detail'),
+)
+
+# Format suffixes
+api_patterns = format_suffix_patterns(api_patterns, allowed=['json', 'api'])
 
 urlpatterns = patterns('Blogger.views',
     url(r'^$', 'list', name='all_archive'),
@@ -10,5 +23,6 @@ urlpatterns = patterns('Blogger.views',
     url(r'^confirm/comment/$', 'comment_posted', name='comment_posted'),
     url(r'^post/(?P<slug>[\w-]+)/$', 'view_post', name='view_post'),
     (r'^rss/$', LatestEntriesFeed()),
-    (r'^api/', include('Blogger.api.urls')),  # no $ on included urlconfs.  It would cause breakage
+    (r'^api/', include(api_patterns)),  
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )
