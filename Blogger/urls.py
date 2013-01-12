@@ -1,20 +1,20 @@
 from django.conf.urls import patterns, include, url
 from Blogger.feeds import LatestEntriesFeed
 from rest_framework.urlpatterns import format_suffix_patterns
-from quickstart.views import PostList, PostDetail, AuthorList, AuthorList
+from Blogger.views import PostList, PostDetail, AuthorList, AuthorDetail
 
 api_patterns = patterns('Blogger.views',
     url(r'^$', 'api_root'),
     url(r'^posts/$', PostList.as_view(), name='posts-list'),
     url(r'^posts/(?P<pk>\d+)/$', PostDetail.as_view(), name='post-detail'),
     url(r'^authors/$', AuthorList.as_view(), name='authors-list'),
-    url(r'^authors/(?P<pk>\d+)/$', AuthorList.as_view(), name='author-detail'),
+    url(r'^authors/(?P<pk>\d+)/$', AuthorDetail.as_view(), name='author-detail'),
 )
 
 # Format suffixes
-urlpatterns = format_suffix_patterns(api_patterns, allowed=['json', 'api'])
+api_patterns = format_suffix_patterns(api_patterns, allowed=['json', 'api'])
 
-urlpatterns += patterns('Blogger.views',
+urlpatterns = patterns('Blogger.views',
     url(r'^$', 'list', name='all_archive'),
     url(r'^(?P<year>\d{4})/$', 'list', name="yearly_archive"),
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/$', 'list', name="monthly_archive"),

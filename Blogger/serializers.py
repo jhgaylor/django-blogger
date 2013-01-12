@@ -2,20 +2,21 @@ from rest_framework import serializers
 from Blogger.models import Post, Author
 
 
-class PostSerializer(serializers.HyperLinkedModelSerializer):
+class PostSerializer(serializers.HyperlinkedModelSerializer):
 
-    author = serializers.RelatedField(source='author')
-    tags = serializers.ManyRelatedField(source='tags')
+
+    author = serializers.HyperlinkedRelatedField(source='author', view_name='author-detail')
+    #tags = serializers.ManyRelatedField(source='tags')
 
     class Meta:
         model = Post
-        fields = ('author', 'title', 'body',
+        fields = ('url', 'author', 'title', 'body',
                   'created_at', 'published',
-                  'tags', 'slug')
+                  'slug')
 
 
-class AuthorSerializer(serializers.HyperLinkedModelSerializer):
+class AuthorSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Author
-        fields = ('first_name', 'last_name')
+        fields = ('url', 'first_name', 'last_name')
