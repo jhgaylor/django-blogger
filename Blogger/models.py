@@ -8,6 +8,8 @@ from Blogger.managers import PostManager
 from django.contrib.syndication.views import Feed
 import unidecode
 import re
+
+from django.utils.translation import ugettext_lazy as _
 BLOG_SETTINGS = settings.BLOG_SETTINGS['defaults']
 
 
@@ -19,6 +21,10 @@ class Tag(models.Model):
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
 
+    class Meta:
+        verbose_name = _("tag")
+        verbose_name_plural = _("tags")
+
     def __unicode__(self):
         return self.name
 
@@ -28,7 +34,7 @@ class Tag(models.Model):
     def number_of_uses(self):
         """Return count of post_set"""
         return self.post_set.count()
-    number_of_uses.short_description = "Number of uses"
+    number_of_uses.short_description = _("Number of uses")
 
 
 class Author(models.Model):
@@ -38,21 +44,22 @@ class Author(models.Model):
 
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, verbose_name=_("user"))
 
     class Meta:
-        unique_together = (("first_name", "last_name"))
+        unique_together = (("first_name", "last_name"),)
 
     def __unicode__(self):
         return ' '.join([self.first_name, self.last_name])
 
     def get_absolute_url(self):
-        return reverse('author_archive', args=['-'.join([self.first_name, self.last_name])])
+        return reverse('author_archive',
+                       args=['-'.join([self.first_name, self.last_name])])
 
     def number_of_posts(self):
         """Return count of post_set"""
         return self.post_set.count()
-    number_of_posts.short_description = "Number of posts"
+    number_of_posts.short_description = _("Number of posts")
 
 
 class Post(models.Model):
@@ -64,7 +71,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    published = models.BooleanField(default=BLOG_SETTINGS['auto_publish'])  # TODO: i don't think this is working.  would like to make it work.
+    published = models.BooleanField(default=BLOG_SETTINGS['auto_publish'])
     tags = models.ManyToManyField(Tag, blank=True)
     slug = models.SlugField(max_length=200, unique=True)
 
@@ -72,7 +79,8 @@ class Post(models.Model):
     popular_posts = PostManager()
 
     class Meta:
-        verbose_name_plural = "posts"
+        verbose_name = _("post")
+        verbose_name_plural = _("posts")
 
     def __unicode__(self):
         return self.title
@@ -86,9 +94,10 @@ class Post(models.Model):
         if len(names) > 20:
             names = names[:20] + "..."
         return names
-    get_tags.short_description = "Tags"
+    get_tags.short_description = _("Tags")
 
-    #slug field should remove the need for this.  Leaving it here for a while until I'm sure
+    # slug field should remove the need for this.
+    # Leaving it here for a while until I'm sure
     # def set_slug(self):
     #     """Sets self.slug from self.title"""
     #     title_str = unidecode.unidecode(self.title).lower()
