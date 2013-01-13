@@ -3,6 +3,10 @@
 {% load markup %}
 {% load comments %}
 
+{% block title %}
+	{{post.title}}
+{% endblock %}
+
 {% block content %}
 	<h1>Title: {{post.title}}</h1>
 	<p>Author: {{post.author}}</p>
