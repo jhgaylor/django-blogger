@@ -2,12 +2,12 @@ from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from Blogger.models import Post, Tag
-
+from django.utils.translation import ugettext_lazy as _
 
 class LatestEntriesFeed(Feed):
     title = _("Blog RSS")
     link = "/rss/"
-    description = "Updates on changes and additions to this blog."
+    description = _("Updates on changes and additions to this blog.")
 
     def items(self):
         return Post.objects.order_by('-created_at')[:5]

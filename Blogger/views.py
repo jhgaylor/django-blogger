@@ -11,6 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from Blogger.serializers import PostSerializer, AuthorSerializer
+from django.utils.translation import ugettext_lazy as _
 import datetime
 
 
@@ -42,7 +43,7 @@ def comment_posted(request):
 
     c = request.GET['c']
     messages.add_message(request, messages.SUCCESS,
-                         'Commented added successfully.')
+                         _('Commented added successfully.'))
     c = Comment.objects.get(pk=c)
     return redirect(c.content_object)
 
@@ -53,7 +54,7 @@ def list(request, year=None, month=None, tag=None, author=None):
 
     data = {
         'posts': None,
-        'section_title': 'Posts'
+        'section_title': _('Posts')
     }
 
     data.update(sidebar_data)
@@ -61,7 +62,7 @@ def list(request, year=None, month=None, tag=None, author=None):
     if tag:
         posts = Post.objects.filter(tags__slug=tag)
         data['posts'] = posts
-        data['section_title'] = "Posts"
+        data['section_title'] = _("Posts")
         return render_on_list(request, data)
     if author:
         fname, lname = author.split('-')
@@ -69,26 +70,26 @@ def list(request, year=None, month=None, tag=None, author=None):
                                     author__last_name=lname
                                     )
         data['posts'] = posts
-        data['section_title'] = "Posts"
+        data['section_title'] = _("Posts")
         return render_on_list(request, data)
     if not year:
         posts = Post.objects.all().order_by('-created_at')
         data['posts'] = posts
-        data['section_title'] = "Posts"
+        data['section_title'] = _("Posts")
         return render_on_list(request, data)
         #Recent posts reverse chrono
     if not month:
         posts = Post.objects.filter(created_at__year=year
                                     ).order_by('-created_at')
         data['posts'] = posts
-        data['section_title'] = "Yearly Archive"
+        data['section_title'] = _("Yearly Archive")
         return render_on_list(request, data)
     else:
         posts = Post.objects.filter(created_at__year=year,
                                     created_at__month=month
                                     ).order_by('-created_at')
         data['posts'] = posts
-        data['section_title'] = "Monthly Archive"
+        data['section_title'] = _("Monthly Archive")
         return render_on_list(request, data)
 
 
