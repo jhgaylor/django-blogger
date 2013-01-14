@@ -10,6 +10,8 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
+from rest_framework import permissions
+from Blogger.permissions import IsOwnerOrReadOnly
 from Blogger.serializers import PostSerializer, AuthorSerializer
 from django.utils.translation import ugettext_lazy as _
 import datetime
@@ -52,6 +54,7 @@ def comment_posted(request):
                          _('Commented added successfully.'))
     c = Comment.objects.get(pk=c)
     return redirect(c.content_object)
+
 
 # returns a list of posts onto the list template
 def list(request, year=None, month=None, tag=None, author=None):
@@ -98,6 +101,7 @@ def list(request, year=None, month=None, tag=None, author=None):
         data['section_title'] = _("Monthly Archive")
         return render_on_list(request, data)
 
+
 # renders a single post
 def view_post(request, slug):
 
@@ -133,7 +137,7 @@ def api_root(request, format=None):
     })
 
 
-class AuthorList(generics.ListCreateAPIView):
+class AuthorList(generics.ListAPIView):
     """
     API endpoint that represents a list of users.
     """
@@ -141,7 +145,7 @@ class AuthorList(generics.ListCreateAPIView):
     serializer_class = AuthorSerializer
 
 
-class AuthorDetail(generics.RetrieveUpdateDestroyAPIView):
+class AuthorDetail(generics.RetrieveAPIView):
     """
     API endpoint that represents a single user.
     """
@@ -155,6 +159,12 @@ class PostList(generics.ListCreateAPIView):
     """
     model = Post
     serializer_class = PostSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly)
+
+    def pre_save(self, obj):
+        author = Author.objects.get(user=self.request.user)
+        obj.author = author
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -163,3 +173,9 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     model = Post
     serializer_class = PostSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly)
+
+    def pre_save(self, obj):
+        author = Author.objects.get(user=self.request.user)
+        obj.author = author
