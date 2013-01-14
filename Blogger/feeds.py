@@ -1,10 +1,11 @@
-from django.utils.translation import ugettext as _
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from Blogger.models import Post, Tag
 from django.utils.translation import ugettext_lazy as _
 
+
 class LatestEntriesFeed(Feed):
+    """RSS feed of the latest Posts"""
     title = _("Blog RSS")
     link = "/rss/"
     description = _("Updates on changes and additions to this blog.")
@@ -20,6 +21,7 @@ class LatestEntriesFeed(Feed):
         return item.author
 
     def item_title(self, item):
+        """Returns an item's title"""
         return item.title
 
     def item_description(self, item):
@@ -40,4 +42,5 @@ class LatestEntriesFeed(Feed):
 
     # item_link is only needed if Post has no get_absolute_url method.
     def item_link(self, item):
+        """Returns item URL"""
         return reverse('view_post', args=[item.slug])

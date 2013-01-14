@@ -15,6 +15,8 @@ from django.utils.translation import ugettext_lazy as _
 import datetime
 
 
+# builds the dictionary for secondary navigation
+# by post title
 def get_sidebar_data():
 
     popular_posts = Post.popular_posts.all()[:5]
@@ -33,12 +35,16 @@ def get_sidebar_data():
     return data
 
 
+# renders data onto list.html for the current theme
 def render_on_list(request, data):
+
     return render_to_response('list.html', data,
                               context_instance=RequestContext(request)
                               )
 
 
+# redirects to the item a comment was made on
+# when a user posts a comment.
 def comment_posted(request):
 
     c = request.GET['c']
@@ -47,7 +53,7 @@ def comment_posted(request):
     c = Comment.objects.get(pk=c)
     return redirect(c.content_object)
 
-
+# returns a list of posts onto the list template
 def list(request, year=None, month=None, tag=None, author=None):
 
     sidebar_data = get_sidebar_data()
@@ -92,7 +98,7 @@ def list(request, year=None, month=None, tag=None, author=None):
         data['section_title'] = _("Monthly Archive")
         return render_on_list(request, data)
 
-
+# renders a single post
 def view_post(request, slug):
 
     post = Post.objects.get(slug=slug)

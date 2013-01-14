@@ -3,7 +3,7 @@ from Blogger.models import Post, Author
 
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
-
+    """Serializes the Post model"""
     author = serializers.HyperlinkedRelatedField(source='author', view_name=
                                                  'author-detail')
     tags = serializers.ManyRelatedField(source='tags')
@@ -27,6 +27,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
+    """Serializes the Author model"""
 
     class Meta:
         model = Author

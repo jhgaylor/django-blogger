@@ -3,12 +3,14 @@ from Blogger.models import Tag, Post, Author
 
 
 class TagAdmin(admin.ModelAdmin):
+    """Admin panel class for Tag"""
     list_display = ('name', 'number_of_uses')
     search_fields = ('name',)
     prepopulated_fields = {"slug": ("name",)}
 
 
 class PostAdmin(admin.ModelAdmin):
+    """Admin panel class for Post"""
     exclude = ('author',)
     date_hierarchy = 'created_at'
     list_display = ('title', 'author', 'created_at', 'published', 'get_tags')
@@ -26,12 +28,9 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class AuthorAdmin(admin.ModelAdmin):
+    """Admin panel class for Author"""
     list_display = ('first_name', 'last_name', 'user', 'number_of_posts')
     search_fields = ('first_name', 'last_name')
-
-
-class CommentAdmin(admin.ModelAdmin):
-    pass
 
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Post, PostAdmin)
