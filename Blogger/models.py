@@ -97,8 +97,8 @@ class Post(models.Model):
     def get_tags(self):
         """Returns tags as a composite string"""
         names = ', '.join([t.name for t in self.tags.all()])
-        if len(names) > 20:
-            names = names[:20] + "..."
+        #if len(names) > 20:
+        #    names = names[:20] + "..."
         return names
     get_tags.short_description = _("Tags")
 

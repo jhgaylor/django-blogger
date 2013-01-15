@@ -9,6 +9,9 @@
 	<script src="/static/underscore.js"></script>
 	<script src="/static/backbone.js"></script>
 	<script src="/static/json2.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Offside|Merienda|Basic|Julius+Sans+One|Quando' rel='stylesheet' type='text/css'>
+
+
 	{% block extra_head %}
 
 	{% endblock %}
@@ -21,9 +24,16 @@
       body {
         padding-top: 60px;
         padding-bottom: 40px;
+        font-family:Merienda;
+
       }
       #id_honeypot {
 	    display: none;
+	}
+
+	.section-header{
+		border-bottom:2px solid black;
+		
 	}
     </style>
 </head>
@@ -45,7 +55,7 @@
 								<a href="{% url all_archive %}">{% trans 'Home' %}</a>
 							</li>
 						</ul>
-					</div><!--/.nav-collapse -->
+					</div>
 				</div>
 			</div>
 		</div>
@@ -80,21 +90,21 @@
 				<div class="span3">
 					{% block sidebar %}
 						{% if popular_posts %}
-							<h3>{% trans 'Popular Posts' %}</h3>
+							<h3 class="section-header">{% trans 'Popular Posts' %}</h3>
 						    {% for p in popular_posts %}
 						        <p><a href="{{p.get_absolute_url}}">{{p.title}} ({{p.comment_count}})</a></p>
 						    {% endfor %}
 						{% endif %}
 
 						{% if recent_posts %}
-							<h3>{% trans 'Recent Posts' %}</h3>
+							<h3 class="section-header">{% trans 'Recent Posts' %}</h3>
 						    {% for p in recent_posts %}
 						        <p><a href="{{p.get_absolute_url}}">{{p.title}}</a></p>
 						    {% endfor %}
 						{% endif %}
 
 						{% if archive %}
-							<h3>{% trans 'Archive' %}</h3>
+							<h3 class="section-header">{% trans 'Archive' %}</h3>
 							
 							{% localtime off %}
 						    {% for date in archive %}
@@ -108,14 +118,14 @@
 						{% endif %}
 
 						{% if authors %}
-							<h3>{% trans 'Authors' %}</h3>
+							<h3 class="section-header">{% trans 'Authors' %}</h3>
 						    {% for a in authors %}
 						        <p><a href="{{a.get_absolute_url}}">{{a}} ({{a.post_set.all.count}})</a></p>
 						    {% endfor %}
 						{% endif %}
 
 						{% if tags %}
-							<h3>{% trans 'Tags' %}</h3>
+							<h3 class="section-header">{% trans 'Tags' %}</h3>
 						    {% for t in tags %}
 						        <p><a href="{{t.get_absolute_url}}">{{t.name}} ({{t.post_set.all.count}})</a></p>
 						    {% endfor %}

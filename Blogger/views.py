@@ -71,7 +71,7 @@ def list(request, year=None, month=None, tag=None, author=None):
     if tag:
         posts = Post.objects.filter(tags__slug=tag)
         data['posts'] = posts
-        data['section_title'] = _("Posts")
+        data['section_title'] = _("Tag archive")
         return render_on_list(request, data)
     if author:
         fname, lname = author.split('-')
@@ -79,7 +79,7 @@ def list(request, year=None, month=None, tag=None, author=None):
                                     author__last_name=lname
                                     )
         data['posts'] = posts
-        data['section_title'] = _("Posts")
+        data['section_title'] = _("Author archive")
         return render_on_list(request, data)
     if not year:
         posts = Post.objects.all().order_by('-created_at')
