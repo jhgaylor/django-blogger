@@ -13,6 +13,7 @@ Installation and setup
     * Ensure that 'rest_framework' is in your installed apps (currently the api is not easily severed from the package).  Rest Framework 2 should be installed for you by pip.
 	* INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
 	* add BLOG_SETTINGS to settings.py.  It should look something like this.
+
     
 ```
     BLOG_SETTINGS = {
