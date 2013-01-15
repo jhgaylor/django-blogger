@@ -9,22 +9,24 @@ Installation and setup
 2. Configure Django
 	* add (r'^', include('Blogger.urls')), to your project's urls.py
  	* Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
-	* TEMPLATE_CONTEXT_PROCESSORS += ("Blogger.context_processors.blog_info",)
-    * Ensure that 'rest_framework' is in your installed apps (currently the api is not easily severed from the package).  Rest Framework 2 should be installed for you by pip.
-	* INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
-	* add BLOG_SETTINGS to settings.py.  It should look something like this.
+    * Ensure that 'rest_framework' is in your installed apps (currently the api is not easily severed from the package). 
+	* make changes to settings.py.  It should look something like this.
 
-    
+
 ```
-    BLOG_SETTINGS = {
-        'defaults': {
-            'auto_publish': False,
-        },
-        'info': {
-            'BLOG_TITLE': 'My Blog Name',
-            'BLOG_SUBTITLE': 'Blog subname',
-        } 
-    }
+INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
+
+TEMPLATE_CONTEXT_PROCESSORS += ("Blogger.context_processors.blog_info",)
+
+BLOG_SETTINGS = {
+    'defaults': {
+        'auto_publish': False,
+    },
+    'info': {
+        'BLOG_TITLE': 'My Blog Name',
+        'BLOG_SUBTITLE': 'Blog subname',
+    } 
+}
 ```
 3. ./manage.py syncdb
   
@@ -39,15 +41,15 @@ In the django admin panel:
 Settings
 --------
 ```
-    BLOG_SETTINGS = {
-        'defaults': {
-            'auto_publish': False,
-        },
-        'info': {
-            'BLOG_TITLE': 'My Blog Name',
-            'BLOG_SUBTITLE': 'Blog subname',
-        } 
-    }
+BLOG_SETTINGS = {
+    'defaults': {
+        'auto_publish': False,
+    },
+    'info': {
+        'BLOG_TITLE': 'My Blog Name',
+        'BLOG_SUBTITLE': 'Blog subname',
+    } 
+}
 ```
 
 info is attached to all responses so the information is available to the templates.
