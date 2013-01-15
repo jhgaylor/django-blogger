@@ -5,7 +5,11 @@ A simple blogging app for django.
 
 Installation and setup
 ----------------------
-1. pip install django-blogger
+
+```
+pip install django-blogger
+```
+
 2. Configure Django
 	* add (r'^', include('Blogger.urls')), to your project's urls.py
  	* Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
@@ -28,8 +32,11 @@ BLOG_SETTINGS = {
     } 
 }
 ```
-3. ./manage.py syncdb
-  
+
+```
+./manage.py syncdb
+```
+
 First use
 ---------
 In the django admin panel:
