@@ -1,5 +1,5 @@
-django-simple-blog
-==================
+django-blogger
+===============
 
 A simple blogging app for django.
 
@@ -67,9 +67,9 @@ defaults change the defaults of models and some constats for views
 Themes
 ------
 Themes are contained in Blogger/themes/THEMENAME/
-Temeplate files for themes are at Blogger/themes/THEMENAME/tempaltes/
+Temeplate files for themes are at Blogger/themes/THEMENAME/templates/
 Files include base.html, list.html, and view_post.html
-Not all files are necessary, and the app will fall back on Blogger/templates/themes/FILE.html
+Not all files are necessary as the app will fall back on Blogger/themes/FALLBACK_THEME/templates/FILE.html where FALLBACK_THEME is the last theme in INSTALLED_APPS
 Static files for themes are at Blogger/themes/THEMENAME/static/
 The default themes are default, 3col and 4col.  They all rely on bootstrap and jquery.
 
