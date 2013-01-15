@@ -86,3 +86,7 @@ Features
 * Comments
 * Administration is done through auto generated admin
 * read/write API
+
+Example sites
+-------------
+http://codegur.us 
