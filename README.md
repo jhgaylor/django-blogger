@@ -5,16 +5,17 @@ A simple blogging app for django.
 
 Installation and setup
 ----------------------
+Install from pypi
 
 ```
 pip install django-blogger
 ```
 
-2. Configure Django
-	* add (r'^', include('Blogger.urls')), to your project's urls.py
- 	* Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
-    * Ensure that 'rest_framework' is in your installed apps (currently the api is not easily severed from the package). 
-	* make changes to settings.py.  It should look something like this.
+Configure Django
+* add (r'^', include('Blogger.urls')), to your project's urls.py
+* Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
+* Ensure that 'rest_framework' is in your installed apps (currently the api is not easily severed from the package). 
+* make changes to settings.py.  It should look something like this.
 
 
 ```
@@ -33,6 +34,7 @@ BLOG_SETTINGS = {
 }
 ```
 
+Update the database
 ```
 ./manage.py syncdb
 ```
@@ -83,7 +85,4 @@ Features
 * Archive 
 * Comments
 * Administration is done through auto generated admin
-
-Planned Additions
------------------
 * read/write API
