@@ -21,10 +21,10 @@ import datetime
 # by post title
 def get_sidebar_data():
 
-    popular_posts = Post.popular_posts.all()[:5]
+    popular_posts = Post.popular_posts.all().order_by('-created_at')[:5]
     recent_posts = Post.objects.filter(
         published=True).order_by('-created_at')[:5]
-    archive = Post.objects.all().dates('created_at', 'month', order='DESC')
+    archive = Post.objects.all().dates('-created_at', 'month', order='DESC')
     tags = Tag.objects.all()
     authors = Author.objects.all()
     data = {
@@ -77,7 +77,7 @@ def list(request, year=None, month=None, tag=None, author=None):
         fname, lname = author.split('-')
         posts = Post.objects.filter(author__first_name=fname,
                                     author__last_name=lname
-                                    )
+                                    ).order_by('-created_at')
         data['posts'] = posts
         data['section_title'] = _("Author archive")
         return render_on_list(request, data)
