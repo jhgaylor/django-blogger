@@ -77,6 +77,8 @@ class Post(models.Model):
                                       verbose_name=_("created at"))
     published = models.BooleanField(default=BLOG_SETTINGS['auto_publish'],
                                     verbose_name=_("published?"))
+    promoted = models.BooleanField(default=BLOG_SETTINGS['auto_promote'],
+                                    verbose_name=_("promoted?"))
     tags = models.ManyToManyField(Tag, blank=True, verbose_name=_("tags"))
     slug = models.SlugField(max_length=200, unique=True,
                             verbose_name=_("slug"))

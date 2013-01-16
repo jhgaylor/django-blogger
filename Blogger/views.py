@@ -20,7 +20,8 @@ import datetime
 # builds the dictionary for secondary navigation
 # by post title
 def get_sidebar_data():
-
+    promoted_posts = Post.objects.filter(
+        published=True, promoted=True).order_by('-created_at')
     popular_posts = Post.popular_posts.filter(
         published=True).order_by('-created_at')[:5]
     recent_posts = Post.objects.filter(
@@ -30,6 +31,7 @@ def get_sidebar_data():
     tags = Tag.objects.all()
     authors = Author.objects.all()
     data = {
+        'promoted_posts': promoted_posts,
         'popular_posts': popular_posts,
         'recent_posts': recent_posts,
         'archive': archive,

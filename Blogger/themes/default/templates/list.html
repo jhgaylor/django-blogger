@@ -4,6 +4,27 @@
 {% load comments %}
 
 {% block content %}
+    {% if promoted_posts %}
+        <h3 class="section-header">Promoted Posts</h3>
+        {% for p in promoted_posts %}
+                <h3><a href="{{p.get_absolute_url}}">{{p.title}}</a></h3>
+                    <p>{{p.created_at}} | 
+                        {% if p.tags.count < 1 %}
+                            No tags
+                        {% endif %}
+                        {% for t in p.tags.all %}
+                            <a href="{{t.get_absolute_url}}">{{t}}</a>
+                            {% if not forloop.last %}
+                            , 
+                            {% endif%}
+                        {%endfor%}
+                    </p>
+                    <p>{{p.body|truncatechars:300|markdown}}</p>
+                    {% if not forloop.last %}
+                        <hr>
+                    {% endif %}
+            {% endfor %}
+    {% endif %}
 	{% if posts %}
 	    <h3 class="section-header">{{section_title}}</h3>
 	    {% for p in posts %}

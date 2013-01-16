@@ -26,6 +26,7 @@ TEMPLATE_CONTEXT_PROCESSORS += ("blogger.context_processors.blog_info",)
 BLOG_SETTINGS = {
     'defaults': {
         'auto_publish': False,
+        'auto_promote': False,
     },
     'info': {
         'BLOG_TITLE': 'My Blog Name',
