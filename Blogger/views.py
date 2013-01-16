@@ -21,10 +21,12 @@ import datetime
 # by post title
 def get_sidebar_data():
 
-    popular_posts = Post.popular_posts.all().order_by('-created_at')[:5]
+    popular_posts = Post.popular_posts.filter(
+        published=True).order_by('-created_at')[:5]
     recent_posts = Post.objects.filter(
         published=True).order_by('-created_at')[:5]
-    archive = Post.objects.all().dates('-created_at', 'month', order='DESC')
+    archive = Post.objects.filter(
+        published=True).dates('-created_at', 'month', order='DESC')
     tags = Tag.objects.all()
     authors = Author.objects.all()
     data = {
@@ -69,32 +71,35 @@ def list(request, year=None, month=None, tag=None, author=None):
     data.update(sidebar_data)
 
     if tag:
-        posts = Post.objects.filter(tags__slug=tag)
+        posts = Post.objects.filter(published=True, tags__slug=tag)
         data['posts'] = posts
         data['section_title'] = _("Tag archive")
         return render_on_list(request, data)
     if author:
         fname, lname = author.split('-')
-        posts = Post.objects.filter(author__first_name=fname,
+        posts = Post.objects.filter(published=True,
+                                    author__first_name=fname,
                                     author__last_name=lname
                                     ).order_by('-created_at')
         data['posts'] = posts
         data['section_title'] = _("Author archive")
         return render_on_list(request, data)
     if not year:
-        posts = Post.objects.all().order_by('-created_at')
+        posts = Post.objects.filter(published=True).order_by('-created_at')
         data['posts'] = posts
         data['section_title'] = _("Posts")
         return render_on_list(request, data)
         #Recent posts reverse chrono
     if not month:
-        posts = Post.objects.filter(created_at__year=year
+        posts = Post.objects.filter(published=True,
+                                    created_at__year=year
                                     ).order_by('-created_at')
         data['posts'] = posts
         data['section_title'] = _("Yearly Archive")
         return render_on_list(request, data)
     else:
-        posts = Post.objects.filter(created_at__year=year,
+        posts = Post.objects.filter(published=True,
+                                    created_at__year=year,
                                     created_at__month=month
                                     ).order_by('-created_at')
         data['posts'] = posts
@@ -106,6 +111,11 @@ def list(request, year=None, month=None, tag=None, author=None):
 def view_post(request, slug):
 
     post = Post.objects.get(slug=slug)
+    if not post.published:
+        messages.add_message(request, messages.SUCCESS,
+                             _('Post does not exist or is not published yet.'))
+        redirect(reverse('all_archive'))
+
     sidebar_data = get_sidebar_data()
     data = {
         'post': post,
