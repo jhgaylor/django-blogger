@@ -12,9 +12,9 @@ class PostManager(models.Manager):
         """attaches django comment_count to all querysets"""
         if not self.entry_type:
             self.entry_type = ContentType.objects.get(model='post')
-        
+
         return super(PostManager, self).get_query_set().all().extra(select={
             'comment_count': """SELECT COUNT(*) FROM django_comments
-            WHERE django_comments.object_pk = Blogger_post.id
+            WHERE django_comments.object_pk = blogger_post.id
             AND django_comments.content_type_id = %s"""
             }, select_params=(self.entry_type.id,)).order_by('-comment_count')

@@ -2,7 +2,6 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render_to_response, redirect
 from django.core.urlresolvers import reverse
 from django.template import RequestContext
-from Blogger.models import Post, Tag, Author
 from django.db.models import Sum
 from django.contrib import messages
 from django.contrib.comments import Comment
@@ -11,8 +10,9 @@ from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework import permissions
-from Blogger.permissions import IsOwnerOrReadOnly
-from Blogger.serializers import PostSerializer, AuthorSerializer
+from blogger.models import Post, Tag, Author
+from blogger.permissions import IsOwnerOrReadOnly
+from blogger.serializers import PostSerializer, AuthorSerializer
 from django.utils.translation import ugettext_lazy as _
 import datetime
 
@@ -26,7 +26,7 @@ def get_sidebar_data():
     recent_posts = Post.objects.filter(
         published=True).order_by('-created_at')[:5]
     archive = Post.objects.filter(
-        published=True).dates('-created_at', 'month', order='DESC')
+        published=True).dates('created_at', 'month', order='DESC')
     tags = Tag.objects.all()
     authors = Author.objects.all()
     data = {

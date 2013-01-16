@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Blogger.models import Post, Author
+from blogger.models import Post, Author
 
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):

@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, include, url
-from Blogger.feeds import LatestEntriesFeed
+from blogger.feeds import LatestEntriesFeed
 from rest_framework.urlpatterns import format_suffix_patterns
-from Blogger.views import PostList, PostDetail, AuthorList, AuthorDetail
+from blogger.views import PostList, PostDetail, AuthorList, AuthorDetail
 
-api_patterns = patterns('Blogger.views',
+api_patterns = patterns('blogger.views',
     url(r'^$', 'api_root'),
     url(r'^posts/$', PostList.as_view(), name='posts-list'),
     url(r'^posts/(?P<pk>\d+)/$', PostDetail.as_view(), name='post-detail'),
@@ -14,7 +14,7 @@ api_patterns = patterns('Blogger.views',
 # Format suffixes
 api_patterns = format_suffix_patterns(api_patterns, allowed=['json', 'api'])
 
-urlpatterns = patterns('Blogger.views',
+urlpatterns = patterns('blogger.views',
     url(r'^$', 'list', name='all_archive'),
     url(r'^(?P<year>\d{4})/$', 'list', name="yearly_archive"),
     url(r'^(?P<year>\d{4})/(?P<month>\d{2})/$', 'list', name="monthly_archive"),

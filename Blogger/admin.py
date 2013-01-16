@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Blogger.models import Tag, Post, Author
+from blogger.models import Tag, Post, Author
 
 
 class TagAdmin(admin.ModelAdmin):

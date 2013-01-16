@@ -12,16 +12,16 @@ pip install django-blogger
 ```
 
 Configure Django
-* add (r'^', include('Blogger.urls')), to your project's urls.py
+* add (r'^', include('blogger.urls')), to your project's urls.py
 * Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
 * Ensure that 'rest_framework' is in your installed apps (currently the api is not easily severed from the package). 
 * make changes to settings.py.  It should look something like this.
 
 
 ```
-INSTALLED_APPS += ('Blogger.themes.default', 'Blogger')
+INSTALLED_APPS += ('blogger.themes.default', 'blogger')
 
-TEMPLATE_CONTEXT_PROCESSORS += ("Blogger.context_processors.blog_info",)
+TEMPLATE_CONTEXT_PROCESSORS += ("blogger.context_processors.blog_info",)
 
 BLOG_SETTINGS = {
     'defaults': {
@@ -66,11 +66,11 @@ defaults change the defaults of models and some constats for views
 
 Themes
 ------
-Themes are contained in Blogger/themes/THEMENAME/
-Temeplate files for themes are at Blogger/themes/THEMENAME/templates/
+Themes are contained in blogger/themes/THEMENAME/
+Temeplate files for themes are at blogger/themes/THEMENAME/templates/
 Files include base.html, list.html, and view_post.html
-Not all files are necessary as the app will fall back on Blogger/themes/FALLBACK_THEME/templates/FILE.html where FALLBACK_THEME is the last theme in INSTALLED_APPS
-Static files for themes are at Blogger/themes/THEMENAME/static/
+Not all files are necessary as the app will fall back on blogger/themes/FALLBACK_THEME/templates/FILE.html where FALLBACK_THEME is the last theme in INSTALLED_APPS
+Static files for themes are at blogger/themes/THEMENAME/static/
 The default themes are default, 3col and 4col.  They all rely on bootstrap and jquery.
 
 
