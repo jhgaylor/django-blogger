@@ -1,3 +1,4 @@
+import datetime
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render_to_response, redirect
 from django.core.urlresolvers import reverse
@@ -5,6 +6,8 @@ from django.template import RequestContext
 from django.db.models import Sum
 from django.contrib import messages
 from django.contrib.comments import Comment
+from django.utils.translation import ugettext_lazy as _
+from taggit.models import Tag
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
@@ -13,9 +16,6 @@ from rest_framework import permissions
 from blogger.models import Post, Author
 from blogger.permissions import IsOwnerOrReadOnly
 from blogger.serializers import PostSerializer, AuthorSerializer
-from taggit.models import Tag
-from django.utils.translation import ugettext_lazy as _
-import datetime
 
 
 # builds the dictionary for secondary navigation

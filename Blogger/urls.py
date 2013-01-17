@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
-from blogger.feeds import LatestEntriesFeed
 from rest_framework.urlpatterns import format_suffix_patterns
+from blogger.feeds import LatestEntriesFeed
 from blogger.views import PostList, PostDetail, AuthorList, AuthorDetail
 
 api_patterns = patterns('blogger.views',

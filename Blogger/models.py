@@ -1,16 +1,14 @@
+import re
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-#from blogger.settings import BLOG_SETTINGS
 from django.conf import settings
 from django.db.models import Sum
-from blogger.managers import PostManager
 from django.contrib.syndication.views import Feed
-import unidecode
-import re
-from taggit.managers import TaggableManager
-
 from django.utils.translation import ugettext_lazy as _
+from taggit.managers import TaggableManager
+from blogger.managers import PostManager
+
 BLOG_SETTINGS = settings.BLOG_SETTINGS['defaults']
 
 class Author(User):
@@ -67,6 +65,8 @@ class Post(models.Model):
 
     # slug field should remove the need for this.
     # Leaving it here for a while until I'm sure
+    # UPDATE: I'm sure.  leaving this here for an example until
+    # I've implemented the change
     # def set_slug(self):
     #     """Sets self.slug from self.title"""
     #     title_str = unidecode.unidecode(self.title).lower()
