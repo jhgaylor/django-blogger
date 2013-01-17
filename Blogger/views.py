@@ -89,6 +89,7 @@ def list(request, year=None, month=None, tag=None, author=None):
         return render_on_list(request, data)
     if not year:
         posts = Post.objects.filter(published=True).order_by('-created_at')
+        data['enable_promoted'] = True
         data['posts'] = posts
         data['section_title'] = _("Posts")
         return render_on_list(request, data)
@@ -105,6 +106,7 @@ def list(request, year=None, month=None, tag=None, author=None):
                                     created_at__year=year,
                                     created_at__month=month
                                     ).order_by('-created_at')
+
         data['posts'] = posts
         data['section_title'] = _("Monthly Archive")
         return render_on_list(request, data)

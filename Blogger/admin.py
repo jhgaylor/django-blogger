@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blogger.models import Post, Author
+from blogger.models import Post
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -15,15 +15,9 @@ class PostAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         """Customize save method via admin panel save"""
         if not change:
-            obj.author = request.user.author_set.all()[0]
+            obj.author = request.user
         #obj.set_slug()
         obj.save()
 
 
-class AuthorAdmin(admin.ModelAdmin):
-    """Admin panel class for Author"""
-    list_display = ('first_name', 'last_name', 'user', 'number_of_posts')
-    search_fields = ('first_name', 'last_name')
-
 admin.site.register(Post, PostAdmin)
-admin.site.register(Author, AuthorAdmin)

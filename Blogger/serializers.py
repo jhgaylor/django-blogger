@@ -20,7 +20,10 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
             instance.title = attrs['title']
             instance.body = attrs['body']
             instance.published = attrs['published']
-            #instance.tags = attrs['tags']
+            # TODO: this is doable. probably need to
+            # split on , and do .set for each
+            #instance.tags = attrs['tags'] 
+            # TODO: 'slugify' with django
             instance.slug = attrs['slug']
             return instance
         return Post(**attrs)
@@ -31,4 +34,4 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Author
-        fields = ('url', 'first_name', 'last_name')
+        fields = ('url', 'username','first_name', 'last_name', )

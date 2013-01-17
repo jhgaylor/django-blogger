@@ -13,29 +13,40 @@ from taggit.managers import TaggableManager
 from django.utils.translation import ugettext_lazy as _
 BLOG_SETTINGS = settings.BLOG_SETTINGS['defaults']
 
-class Author(models.Model):
-    """
-    Association of a Blog Author data and a django user
-    """
-
-    first_name = models.CharField(max_length=200, verbose_name=_("first name"))
-    last_name = models.CharField(max_length=200, verbose_name=_("last name"))
-    user = models.ForeignKey(User, verbose_name=_("user"))
-
-    class Meta:
-        unique_together = (("first_name", "last_name"),)
-
-    def __unicode__(self):
-        return ' '.join([self.first_name, self.last_name])
-
+class Author(User):
     def get_absolute_url(self):
         return reverse('author_archive',
                        args=['-'.join([self.first_name, self.last_name])])
 
-    def number_of_posts(self):
-        """Return count of post_set"""
-        return self.post_set.count()
-    number_of_posts.short_description = _("Number of posts")
+    class Meta:
+        proxy=True
+
+    def __unicode__(self):
+        return ' '.join([self.first_name, self.last_name])
+
+# class Author(models.Model):
+#     """
+#     Association of a Blog Author data and a django user
+#     """
+
+#     first_name = models.CharField(max_length=200, verbose_name=_("first name"))
+#     last_name = models.CharField(max_length=200, verbose_name=_("last name"))
+#     user = models.ForeignKey(User, verbose_name=_("user"))
+
+#     class Meta:
+#         unique_together = (("first_name", "last_name"),)
+
+#     def __unicode__(self):
+#         return ' '.join([self.first_name, self.last_name])
+
+#     def get_absolute_url(self):
+#         return reverse('author_archive',
+#                        args=['-'.join([self.first_name, self.last_name])])
+
+#     def number_of_posts(self):
+#         """Return count of post_set"""
+#         return self.post_set.count()
+#     number_of_posts.short_description = _("Number of posts")
 
 
 class Post(models.Model):
@@ -43,7 +54,7 @@ class Post(models.Model):
     User generated blog post
     """
 
-    author = models.ForeignKey(Author, blank=True, verbose_name=_("author"))
+    author = models.ForeignKey(User, blank=True, verbose_name=_("author"))
     title = models.CharField(max_length=200, unique=True,
                              verbose_name=_("title"))
     body = models.TextField(verbose_name=_("body"))
