@@ -127,7 +127,7 @@
 						{% if tags %}
 							<h3 class="section-header">{% trans 'Tags' %}</h3>
 						    {% for t in tags %}
-						        <p><a href="{{t.get_absolute_url}}">{{t.name}} ({{t.post_set.all.count}})</a></p>
+						        <p><a href="{{t.get_absolute_url}}">{{t.name}} ({{t.taggit_taggeditem_items.count}})</a></p>
 						    {% endfor %}
 						{% endif %}
 					{% endblock %}

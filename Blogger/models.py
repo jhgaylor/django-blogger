@@ -8,36 +8,10 @@ from blogger.managers import PostManager
 from django.contrib.syndication.views import Feed
 import unidecode
 import re
+from taggit.managers import TaggableManager
 
 from django.utils.translation import ugettext_lazy as _
 BLOG_SETTINGS = settings.BLOG_SETTINGS['defaults']
-
-
-class Tag(models.Model):
-    """
-    A string to be associated with another model
-    """
-
-    name = models.CharField(max_length=200, unique=True,
-                            verbose_name=_("name"))
-    slug = models.SlugField(max_length=200, unique=True,
-                            verbose_name=_("slug"))
-
-    class Meta:
-        verbose_name = _("tag")
-        verbose_name_plural = _("tags")
-
-    def __unicode__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('tag_archive', args=[str(self.slug)])
-
-    def number_of_uses(self):
-        """Return count of post_set"""
-        return self.post_set.count()
-    number_of_uses.short_description = _("Number of uses")
-
 
 class Author(models.Model):
     """
@@ -79,7 +53,7 @@ class Post(models.Model):
                                     verbose_name=_("published?"))
     promoted = models.BooleanField(default=BLOG_SETTINGS['auto_promote'],
                                     verbose_name=_("promoted?"))
-    tags = models.ManyToManyField(Tag, blank=True, verbose_name=_("tags"))
+    tags = TaggableManager() #models.ManyToManyField(Tag, blank=True, verbose_name=_("tags"))
     slug = models.SlugField(max_length=200, unique=True,
                             verbose_name=_("slug"))
 

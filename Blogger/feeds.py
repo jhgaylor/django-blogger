@@ -1,6 +1,7 @@
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
-from blogger.models import Post, Tag
+from blogger.models import Post
+from taggit.models import Tag
 from django.utils.translation import ugettext_lazy as _
 
 
