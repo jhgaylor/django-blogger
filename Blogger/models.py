@@ -7,7 +7,7 @@ from django.db.models import Sum
 from django.contrib.syndication.views import Feed
 from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
-from blogger.managers import PostManager
+from .managers import PostManager
 
 BLOG_SETTINGS = settings.BLOG_SETTINGS['defaults']
 

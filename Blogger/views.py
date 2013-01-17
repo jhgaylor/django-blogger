@@ -14,8 +14,8 @@ from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework import permissions
 from blogger.models import Post, Author
-from blogger.permissions import IsOwnerOrReadOnly
-from blogger.serializers import PostSerializer, AuthorSerializer
+from .permissions import IsOwnerOrReadOnly
+from .serializers import PostSerializer, AuthorSerializer
 
 
 # builds the dictionary for secondary navigation

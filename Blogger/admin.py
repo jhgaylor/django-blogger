@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blogger.models import Post
+from .models import Post
 
 
 class PostAdmin(admin.ModelAdmin):

@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from blogger.models import Post, Author
+from .models import Post
 # from django.util import unittest
 
 
