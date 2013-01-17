@@ -12,7 +12,7 @@ pip install django-blogger
 ```
 
 Configure Django
-* add (r'^', include('blogger.urls')), to your project's urls.py
+* add ```(r'^', include('blogger.urls')),``` to your project's urls.py
 * Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
 * Ensure that 'rest_framework' is in your installed apps (currently the api is not easily severed from the package). 
 * make changes to settings.py.  It should look something like this.
@@ -44,7 +44,7 @@ First use
 ---------
 In the django admin panel:
 
-1. Make an author and associate it with your django user
+1. Ensure your user has a first and last name
 2. Post stuff!
 
 
@@ -54,6 +54,7 @@ Settings
 BLOG_SETTINGS = {
     'defaults': {
         'auto_publish': False,
+        'auto_promote': False,
     },
     'info': {
         'BLOG_TITLE': 'My Blog Name',
@@ -63,6 +64,7 @@ BLOG_SETTINGS = {
 ```
 
 info is attached to all responses so the information is available to the templates.
+
 defaults change the defaults of models and some constats for views
 
 Themes
