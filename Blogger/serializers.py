@@ -1,3 +1,4 @@
+from django.template.defaultfilters import slugify
 from rest_framework import serializers
 from .models import Post, Author
 
@@ -21,10 +22,10 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
             instance.body = attrs['body']
             instance.published = attrs['published']
             # TODO: this is doable. probably need to
-            # split on , and do .set for each
-            #instance.tags = attrs['tags'] 
-            # TODO: 'slugify' with django
-            instance.slug = attrs['slug']
+            # tags = [tag.trim() for tag in attrs['tags'].split(',')]
+            # instance.tags.set(tags)
+            # TODO: test this
+            instance.slug = slugify(attrs['title'])
             return instance
         return Post(**attrs)
 

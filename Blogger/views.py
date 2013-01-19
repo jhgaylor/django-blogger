@@ -196,5 +196,4 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
                           IsOwnerOrReadOnly)
 
     def pre_save(self, obj):
-        author = Author.objects.get(user=self.request.user)
-        obj.author = author
+        obj.author = self.request.user
