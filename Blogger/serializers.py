@@ -31,7 +31,8 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
     """Serializes the Author model"""
+    posts = serializers.ManyHyperlinkedRelatedField(source='post_set', view_name='post-detail')
 
     class Meta:
         model = Author
-        fields = ('url', 'username','first_name', 'last_name', )
+        fields = ('url', 'username','first_name', 'last_name', 'posts')
