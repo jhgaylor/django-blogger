@@ -64,18 +64,29 @@ Themes
 ------
 Themes are contained in blogger/themes/THEMENAME/
 
-Static files for themes are at blogger/themes/THEMENAME/static/
-
-Temeplate files for themes are at blogger/themes/THEMENAME/templates/
-
-Files
-* base.html
-* list.html
-* view_post.html
+```
+blogger
++-- themes
+    |-- default
+    |   |-- static
+    |   |   +-- Bootstrap
+    |   |
+    |   +-- templates
+    |       |-- base.html
+    |       |-- list.html
+    |       +-- view_post.html
+    |
+    +-- 3col
+        |-- static
+        |   +-- Bootstrap
+        |
+        +-- templates
+            |-- base.html
+            |-- list.html
+            +-- view_post.html
+```
 
 Not all files are necessary as the app will fall back on the last theme in INSTALLED_APPS
-
-Two themes are available by default and 3col.  They rely on bootstrap and jquery.
 
 
 Features
