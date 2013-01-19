@@ -15,6 +15,7 @@ Configure Django
 ----------------
 
 add to urls.py
+
 ```(r'^', include('blogger.urls')),``` 
 
 
@@ -62,11 +63,19 @@ In the django admin panel:
 Themes
 ------
 Themes are contained in blogger/themes/THEMENAME/
-Temeplate files for themes are at blogger/themes/THEMENAME/templates/
-Files include base.html, list.html, and view_post.html
-Not all files are necessary as the app will fall back on blogger/themes/FALLBACK_THEME/templates/FILE.html where FALLBACK_THEME is the last theme in INSTALLED_APPS
+
 Static files for themes are at blogger/themes/THEMENAME/static/
-The default themes are default and 3col.  They all rely on bootstrap and jquery.
+
+Temeplate files for themes are at blogger/themes/THEMENAME/templates/
+
+Files
+* base.html
+* list.html
+* view_post.html
+
+Not all files are necessary as the app will fall back on the last theme in INSTALLED_APPS
+
+Two themes are available by default and 3col.  They rely on bootstrap and jquery.
 
 
 Features
