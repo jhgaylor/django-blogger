@@ -174,7 +174,7 @@ class AuthorDetail(generics.RetrieveAPIView):
 
 class PostList(generics.ListCreateAPIView):
     """
-    API endpoint that represents a list of groups.
+    API endpoint that represents a list of posts.
     """
     model = Post
     serializer_class = PostSerializer
@@ -188,7 +188,7 @@ class PostList(generics.ListCreateAPIView):
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    API endpoint that represents a single group.
+    API endpoint that represents a single post.
     """
     model = Post
     serializer_class = PostSerializer
