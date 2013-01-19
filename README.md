@@ -3,8 +3,8 @@ django-blogger
 
 A simple blogging app for django.
 
-Installation and setup
-----------------------
+Install
+------------
 Install from pypi
 
 ```
@@ -12,23 +12,33 @@ pip install django-blogger
 ```
 
 Configure Django
-* add ```(r'^', include('blogger.urls')),``` to your project's urls.py
-* Make sure django.contrib.comments, django.contrib.markup, and django.contrib.admin are setup/enabled
-* Ensure that 'rest_framework' is in your installed apps (currently the api is not easily severed from the package). 
-* make changes to settings.py.  It should look something like this.
+----------------
+
+add to urls.py
+```(r'^', include('blogger.urls')),``` 
 
 
+settings.py
 ```
-INSTALLED_APPS += ('blogger.themes.default', 'blogger')
+INSTALLED_APPS += (
+    'django.contrib.admin', # This must be configured
+    'django.contrib.comments', # This must be configured
+    'django.contrib.markup', # to render markdown
+    'rest_framework', # django rest framework 2
+    'taggit', # django-taggit
+    'blogger.themes.default', # the base theme
+    'blogger' # the app
+)
 
+# this will attach BLOG_SETTINGS['info'] to HttpResponses
 TEMPLATE_CONTEXT_PROCESSORS += ("blogger.context_processors.blog_info",)
 
 BLOG_SETTINGS = {
-    'defaults': {
+    'defaults': { # change the defaults of models and some constats for views
         'auto_publish': False,
         'auto_promote': False,
     },
-    'info': {
+    'info': { # attached to all responses so the information is available to the templates.
         'BLOG_TITLE': 'My Blog Name',
         'BLOG_SUBTITLE': 'Blog subname',
     } 
@@ -40,6 +50,7 @@ Update the database
 ./manage.py syncdb
 ```
 
+
 First use
 ---------
 In the django admin panel:
@@ -47,25 +58,6 @@ In the django admin panel:
 1. Ensure your user has a first and last name
 2. Post stuff!
 
-
-Settings
---------
-```
-BLOG_SETTINGS = {
-    'defaults': {
-        'auto_publish': False,
-        'auto_promote': False,
-    },
-    'info': {
-        'BLOG_TITLE': 'My Blog Name',
-        'BLOG_SUBTITLE': 'Blog subname',
-    } 
-}
-```
-
-info is attached to all responses so the information is available to the templates.
-
-defaults change the defaults of models and some constats for views
 
 Themes
 ------
@@ -79,7 +71,6 @@ The default themes are default and 3col.  They all rely on bootstrap and jquery.
 
 Features
 --------
-
 * RSS Feed 
 * Markdown 
 * Twitter Bootstrap UI
