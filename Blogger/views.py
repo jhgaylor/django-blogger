@@ -148,7 +148,7 @@ def archive_author(request, author=None):
 
 
 # Begin API Views
-@api_view
+@api_view(['GET'])
 def api_root(request, format=None):
     return Response({
         'authors': reverse('authors-list', request=request),
