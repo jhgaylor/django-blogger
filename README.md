@@ -62,7 +62,6 @@ In the django admin panel:
 
 Themes
 ------
-Themes are contained in blogger/themes/THEMENAME/
 
 ```
 blogger

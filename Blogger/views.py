@@ -174,12 +174,19 @@ class AuthorDetail(generics.RetrieveAPIView):
 
 class PostList(generics.ListCreateAPIView):
     """
-    API endpoint that represents a list of posts.
+    API endpoint that represents a list of groups.
     """
     model = Post
     serializer_class = PostSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly)
+
+    def filter_queryset(self, queryset):
+        # this would make it so it only returned posts owned
+        # by the user requesting them
+        # queryset = queryset.filter(author=self.request.user)
+        return super(generics.ListCreateAPIView,
+                     self).filter_queryset(queryset)
 
     def pre_save(self, obj):
         author = Author.objects.get(user=self.request.user)
