@@ -59,12 +59,3 @@ class Post(models.Model):
         #    names = names[:20] + "..."
         return names
     get_tags.short_description = _("Tags")
-
-    # slug field should remove the need for this.
-    # Leaving it here for a while until I'm sure
-    # UPDATE: I'm sure.  leaving this here for an example until
-    # I've implemented the change
-    # def set_slug(self):
-    #     """Sets self.slug from self.title"""
-    #     title_str = unidecode.unidecode(self.title).lower()
-    #     self.slug = re.sub(r'\W+','-',title_str)

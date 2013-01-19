@@ -1,0 +1,1 @@
+#test the feed https://github.com/Fantomas42/django-blog-zinnia/blob/master/zinnia/tests/feeds.py#L141

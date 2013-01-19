@@ -1,0 +1,1 @@
+#make sure all url's return 200
