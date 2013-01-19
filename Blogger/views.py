@@ -1,9 +1,5 @@
-import datetime
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render_to_response, redirect
-from django.core.urlresolvers import reverse
 from django.template import RequestContext
-from django.db.models import Sum
 from django.contrib import messages
 from django.contrib.comments import Comment
 from django.utils.translation import ugettext_lazy as _
