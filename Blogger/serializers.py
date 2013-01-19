@@ -21,10 +21,9 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
             instance.title = attrs['title']
             instance.body = attrs['body']
             instance.published = attrs['published']
-            # TODO: this is doable. probably need to
+            # TODO: assign tags from json data
             # tags = [tag.trim() for tag in attrs['tags'].split(',')]
             # instance.tags.set(tags)
-            # TODO: test this
             instance.slug = slugify(attrs['title'])
             return instance
         return Post(**attrs)

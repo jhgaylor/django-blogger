@@ -24,5 +24,8 @@ urlpatterns = patterns('blogger.views',
     url(r'^post/(?P<slug>[\w-]+)/$', 'view_post', name='view_post'),
     (r'^rss/$', LatestEntriesFeed()),
     (r'^api/', include(api_patterns)),  
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+)
+
+urlpatterns += patterns('',
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 )
