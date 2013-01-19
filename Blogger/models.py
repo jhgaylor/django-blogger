@@ -1,10 +1,7 @@
-import re
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.conf import settings
-from django.db.models import Sum
-from django.contrib.syndication.views import Feed
 from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 from .managers import PostManager
