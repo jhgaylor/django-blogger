@@ -4,7 +4,7 @@ from .feeds import LatestEntriesFeed
 from .views import PostList, PostDetail, AuthorList, AuthorDetail
 
 api_patterns = patterns('blogger.views',
-    url(r'^$', 'api_root'),
+    url(r'^$', 'api_root', name="api_root"),
     url(r'^posts/$', PostList.as_view(), name='posts-list'),
     url(r'^posts/(?P<pk>\d+)/$', PostDetail.as_view(), name='post-detail'),
     url(r'^authors/$', AuthorList.as_view(), name='authors-list'),
@@ -22,10 +22,11 @@ urlpatterns = patterns('blogger.views',
     url(r'^author/(?P<author>[\w-]+)/$', 'list', name='author_archive'),
     url(r'^confirm/comment/$', 'comment_posted', name='comment_posted'),
     url(r'^post/(?P<slug>[\w-]+)/$', 'view_post', name='view_post'),
-    (r'^rss/$', LatestEntriesFeed()),
+    
     (r'^api/', include(api_patterns)),  
 )
 
 urlpatterns += patterns('',
+    url(r'^rss/$', LatestEntriesFeed(), name="latest_entries_rss"),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 )
