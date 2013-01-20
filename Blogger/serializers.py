@@ -17,7 +17,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 
     def restore_object(self, attrs, instance=None):
         if instance is not None:
-            instance.author = attrs['author']
+            # author is controlled by the view
             instance.title = attrs['title']
             instance.body = attrs['body']
             instance.published = attrs['published']
