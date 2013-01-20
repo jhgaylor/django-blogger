@@ -130,19 +130,6 @@ def view_post(request, slug):
                               context_instance=RequestContext(request)
                               )
 
-
-def archive_time(request):
-    pass
-
-
-def archive_category(request, category=None):
-    pass
-
-
-def archive_author(request, author=None):
-    pass
-
-
 # Begin API Views
 @api_view(['GET'])
 def api_root(request, format=None):
