@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.comments import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.utils.timezone import now
+import json
+
 
 class ViewTests(TestCase):
 
@@ -13,10 +15,10 @@ class ViewTests(TestCase):
         password = 'test'
         test_admin = User.objects.create_superuser('test', 'test@codegur.us',
                                                    password)
-        test_admin.first_name="Test"
-        test_admin.last_name="Tester"
+        test_admin.first_name = "Test"
+        test_admin.last_name = "Tester"
         test_admin.save()
-        
+
         self.client.login(username=test_admin.username, password=password)
 
         post = Post.objects.create(
@@ -25,7 +27,7 @@ class ViewTests(TestCase):
             body="test post body",
             slug="test-post-title"
         )
-        
+
     def test_api_root(self):
         resp = self.client.get(reverse('api_root'))
         self.assertEqual(resp.status_code, 200)
@@ -35,7 +37,7 @@ class ViewTests(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_api_post_detail(self):
-        resp = self.client.get(reverse('post-detail', kwargs={'pk':1}))
+        resp = self.client.get(reverse('post-detail', kwargs={'pk': 1}))
         self.assertEqual(resp.status_code, 200)
 
     def test_api_authors_list(self):
@@ -43,7 +45,20 @@ class ViewTests(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_api_author_detail(self):
-        resp = self.client.get(reverse('author-detail', kwargs={'pk':1}))
+        resp = self.client.get(reverse('author-detail', kwargs={'pk': 1}))
+        self.assertEqual(resp.status_code, 200)
+
+    def test_api_save_post(self):
+        data = {
+            'author': '/api/posts/1/',
+            'title': 'test post renamed',
+            'body': 'test post body2',
+            'published': True,
+        }
+        resp = self.client.put(reverse('author-detail', kwargs={'pk': 1}),
+                               data=json.dumps(data),
+                               content_type='application/json'
+                               )
         self.assertEqual(resp.status_code, 200)
 
     def test_all_archive(self):
@@ -52,7 +67,9 @@ class ViewTests(TestCase):
 
     def test_yearly_archive(self):
         year = now().year
-        resp = self.client.get(reverse('yearly_archive', kwargs={'year':year}))
+        resp = self.client.get(reverse('yearly_archive',
+                                       kwargs={'year': year})
+                               )
         self.assertEqual(resp.status_code, 200)
 
     def test_monthly_archive(self):
@@ -61,17 +78,23 @@ class ViewTests(TestCase):
         # month has to be a 2 digit int represented as a string
         if len(month) == 1:
             month = "".join(['0', month])
-        resp = self.client.get(reverse('monthly_archive', kwargs={'year':year, 'month':month}))
+        resp = self.client.get(reverse('monthly_archive',
+                                       kwargs={'year': year, 'month': month})
+                               )
         self.assertEqual(resp.status_code, 200)
 
     def test_tag_archive(self):
         tag_string = "testtag"
-        resp = self.client.get(reverse('tag_archive', kwargs={'tag': tag_string}))
+        resp = self.client.get(reverse('tag_archive',
+                                       kwargs={'tag': tag_string})
+                               )
         self.assertEqual(resp.status_code, 200)
 
     def test_author_archive(self):
         author_string = "Testy-Testington"
-        resp = self.client.get(reverse('author_archive', kwargs={'author':author_string}))
+        resp = self.client.get(reverse('author_archive',
+                                       kwargs={'author': author_string})
+                               )
         self.assertEqual(resp.status_code, 200)
 
     #ensure that when a comment is created that
@@ -81,17 +104,22 @@ class ViewTests(TestCase):
             id=1,
             object_pk=1,
             site_id=1,
-            content_type = ContentType.objects.get(model='post')
+            content_type=ContentType.objects.get(model='post')
         )
-        resp = self.client.get(reverse('comment_posted'), data={'c':1})
+        resp = self.client.get(reverse('comment_posted'),
+                               data={'c': comment.id}
+                               )
         self.assertEqual(resp.status_code, 302)
 
-        resp = self.client.get(reverse('comment_posted'), data={'c':1}, follow=True)
+        resp = self.client.get(reverse('comment_posted'),
+                               data={'c': 1},
+                               follow=True
+                               )
         self.assertEqual(resp.status_code, 200)
 
     def test_view_post(self):
         slug = "test-post-title"
-        resp = self.client.get(reverse('view_post', kwargs={'slug':slug}))
+        resp = self.client.get(reverse('view_post', kwargs={'slug': slug}))
         self.assertEqual(resp.status_code, 200)
 
     def test_rss_feed_renders(self):

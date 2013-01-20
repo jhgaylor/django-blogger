@@ -172,8 +172,7 @@ class PostList(generics.ListCreateAPIView):
                      self).filter_queryset(queryset)
 
     def pre_save(self, obj):
-        author = Author.objects.get(user=self.request.user)
-        obj.author = author
+        obj.author = self.request.user
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
