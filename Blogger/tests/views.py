@@ -48,7 +48,24 @@ class ViewTests(TestCase):
         resp = self.client.get(reverse('author-detail', kwargs={'pk': 1}))
         self.assertEqual(resp.status_code, 200)
 
-    def test_api_save_post(self):
+    def test_api_create_post(self):
+        author_url = reverse('author-detail', kwargs={'pk': 1})
+        data = {
+            'author': author_url,
+            'title': 'second test post',
+            'slug': 'who-cares',
+            'body': '2nd test post body',
+            'published': True,
+        }
+        url = reverse('posts-list')
+        resp = self.client.post(url,
+                               data=json.dumps(data),
+                               content_type='application/json'
+                               )
+        
+        self.assertEqual(resp.status_code, 201)
+
+    def test_api_update_post(self):
         author_url = reverse('author-detail', kwargs={'pk': 1})
         data = {
             'author': author_url,
@@ -63,7 +80,6 @@ class ViewTests(TestCase):
                                content_type='application/json'
                                )
         
-        print resp
         self.assertEqual(resp.status_code, 200)
 
     def test_all_archive(self):
