@@ -69,6 +69,7 @@ def list(request, year=None, month=None, tag=None, author=None):
 
     data.update(sidebar_data)
 
+    # TODO: refactor this if if if if block
     #tag archive
     if tag:
         posts = Post.objects.filter(published=True, tags__slug=tag)

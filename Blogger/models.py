@@ -9,6 +9,8 @@ from .managers import PostManager
 BLOG_SETTINGS = settings.BLOG_SETTINGS['defaults']
 
 class Author(User):
+    """A Proxy for User. Overrides some getters"""
+
     class Meta:
         proxy=True
 
@@ -31,6 +33,7 @@ class Post(models.Model):
     body = models.TextField(verbose_name=_("body"))
     created_at = models.DateTimeField(auto_now_add=True,
                                       verbose_name=_("created at"))
+    # TODO: last modified?
     published = models.BooleanField(default=BLOG_SETTINGS['auto_publish'],
                                     verbose_name=_("published?"))
     promoted = models.BooleanField(default=BLOG_SETTINGS['auto_promote'],
