@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "django-blogger",
-    version = "0.3.1.5",
+    version = "1.0.0",
     author = "Jake Gaylor",
     author_email = "jake@codegur.us",
     description = "A package to administer a simple blog via Django.",
