@@ -12,9 +12,10 @@ class ViewTests(TestCase):
 
     def setUp(self):
         #make a bunch of objects for the tests
-        password = 'test'
+        self.test_password = password = 'test'
         test_admin = User.objects.create_superuser('test', 'test@codegur.us',
                                                    password)
+        self.test_normal = User.objects.create_user('test2', 'test@codegur.us', password)
         test_admin.first_name = "Test"
         test_admin.last_name = "Tester"
         test_admin.save()
@@ -47,7 +48,7 @@ class ViewTests(TestCase):
     def test_api_author_detail(self):
         resp = self.client.get(reverse('author-detail', kwargs={'pk': 1}))
         self.assertEqual(resp.status_code, 200)
-
+    
     def test_api_create_post(self):
         author_url = reverse('author-detail', kwargs={'pk': 1})
         data = {
@@ -58,6 +59,7 @@ class ViewTests(TestCase):
             'published': True,
         }
         url = reverse('posts-list')
+        #make a post with a dictionary via restore_object
         resp = self.client.post(url,
                                data=json.dumps(data),
                                content_type='application/json'
@@ -81,6 +83,26 @@ class ViewTests(TestCase):
                                )
         
         self.assertEqual(resp.status_code, 200)
+
+    #ensure read only for user that isn't post author
+    def test_api_update_post_not_author(self):
+        author_url = reverse('author-detail', kwargs={'pk': 2})
+        data = {
+            'author': author_url,
+            'title': 'test post renamed',
+            'slug': 'who-cares',
+            'body': 'test post body2',
+            'published': True,
+        }
+        url = reverse('post-detail', kwargs={'pk': 1})
+
+        self.client.login(username=self.test_normal, password=self.test_password)
+        resp = self.client.put(url,
+                               data=json.dumps(data),
+                               content_type='application/json'
+                               )
+        
+        self.assertEqual(resp.status_code, 403)
 
     def test_all_archive(self):
         resp = self.client.get(reverse('all_archive'))
