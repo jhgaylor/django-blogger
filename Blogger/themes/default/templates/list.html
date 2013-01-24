@@ -8,7 +8,7 @@
         {% if promoted_posts %}
             <h3 class="section-header">Promoted Posts</h3>
             {% for p in promoted_posts %}
-                    <h3><a href="{{p.get_absolute_url}}">{{p.title}}</a></h3>
+                    <h3><a href="{{p.get_absolute_url}}">{{p.title}}</a> {% if user.is_authenticated %}<small><a href="{% url admin:blogger_post_change p.id %}">(edit)</a></small>{% endif %}</h3>
                         <p>{{p.created_at}} | 
                             {% if p.tags.count < 1 %}
                                 No tags
@@ -31,7 +31,7 @@
 	{% if posts %}
 	    <h3 class="section-header">{{section_title}}</h3>
 	    {% for p in posts %}
-	        <h3><a href="{{p.get_absolute_url}}">{{p.title}}</a></h3>
+	        <h3><a href="{{p.get_absolute_url}}">{{p.title}}</a> {% if user.is_authenticated %}<small><a href="{% url admin:blogger_post_change p.id %}">(edit)</a></small>{% endif %}</h3>
                 <p>{{p.created_at}} | 
                     {% if p.tags.count < 1 %}
                         No tags
