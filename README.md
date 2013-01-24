@@ -15,6 +15,7 @@ Configure Django
 ----------------
 
 add to urls.py
+
 ```
 (r'^', include('blogger.urls')),
 ``` 
