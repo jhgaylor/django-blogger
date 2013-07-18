@@ -1,6 +1,9 @@
 import os
 #from distutils.core import setup
 from setuptools import setup, find_packages
+#how to upload to pypl
+#python setup.py register
+#python setup.py sdist upload
 
 setup(
     name = "django-blogger",
