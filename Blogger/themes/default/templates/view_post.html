@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Title: {{post.title}}  {% if user.is_authenticated %}<small><a href="{% url admin:blogger_post_change post.id %}">(edit)</a></small>{% endif %}</h1>
-	<p>Author: {{post.author}}</p>
+	<h1>{{post.title}}  {% if user.is_authenticated %}<small><a href="{% url admin:blogger_post_change post.id %}">(edit)</a></small>{% endif %}</h1>
+	<p>By: {{post.author}}</p>
 	<p>{{post.created_at}}</p>
 	<p>{{post.body|markdown}}</p>
 

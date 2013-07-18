@@ -32,3 +32,6 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+django-blogger.sublime-project
+django-blogger.sublime-workspace
