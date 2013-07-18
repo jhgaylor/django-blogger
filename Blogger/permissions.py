@@ -7,6 +7,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
     """
 
     def has_permission(self, request, view, obj=None):
+        
         # Skip the check unless this is an object-level test
         if obj is None:
             return True

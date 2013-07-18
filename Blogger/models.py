@@ -6,7 +6,27 @@ from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 from .managers import PostManager
 
+class ClassName(object):
+    """docstring for ClassName"""
+    def __init__(self, arg):
+        super(ClassName, self).__init__()
+        self.arg = arg
+
+
 BLOG_SETTINGS = settings.BLOG_SETTINGS['defaults']
+
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=30)
+
+    # class Meta:
+    #     proxy = True
+
+    def get_absolute_url(self):
+        return super(Person, self).get_absolute_url()
+
+    def __unicode__(self):
+        return super(Person, self).__unicode__()
 
 class Author(User):
     """A Proxy for User. Overrides some getters"""
