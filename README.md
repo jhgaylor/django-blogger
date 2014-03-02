@@ -1,7 +1,7 @@
 django-blogger
 ===============
 
-A simple blogging app for django.
+A simple blogging app for django 1.4.
 
 Install
 ------------
